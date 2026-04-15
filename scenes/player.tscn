@@ -1,84 +1,47 @@
 [gd_scene format=3 uid="uid://p7kabvjhnfd0"]
 
-[ext_resource type="Texture2D" uid="uid://c7gis2rj16y83" path="res://assets/Create_a_futuristic_pixel_art_soldier_rotations_8dir-ezgif.com-gif-to-sprite-converter.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://brbylagm77udv" path="res://scripts/player.gd" id="1_g2els"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_e2o6t"]
-atlas = ExtResource("1_3vyb7")
-region = Rect2(0, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_feb5d"]
-atlas = ExtResource("1_3vyb7")
-region = Rect2(48, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fc0e3"]
-atlas = ExtResource("1_3vyb7")
-region = Rect2(96, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7jktm"]
-atlas = ExtResource("1_3vyb7")
-region = Rect2(144, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ryrav"]
-atlas = ExtResource("1_3vyb7")
-region = Rect2(192, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_eow3j"]
-atlas = ExtResource("1_3vyb7")
-region = Rect2(0, 48, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_j5wjh"]
-atlas = ExtResource("1_3vyb7")
-region = Rect2(48, 48, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vef74"]
-atlas = ExtResource("1_3vyb7")
-region = Rect2(96, 48, 48, 48)
+[ext_resource type="Texture2D" uid="uid://dcj7bytap22tp" path="res://assets/pc/pc_idle/pc_idle_0000.png" id="2_qlg0r"]
+[ext_resource type="Texture2D" uid="uid://djn5pb0o5so82" path="res://assets/pc/pc_idle/pc_idle_0001.png" id="3_tuyoq"]
+[ext_resource type="Texture2D" uid="uid://dptayt6ofedhi" path="res://assets/pc/pc_idle/pc_idle_0002.png" id="4_fjrip"]
+[ext_resource type="Texture2D" uid="uid://cjnqw5yo28mod" path="res://assets/pc/pc_idle/pc_idle_0003.png" id="5_smehm"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_hve3p"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_e2o6t")
+"texture": ExtResource("2_qlg0r")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_feb5d")
+"texture": ExtResource("3_tuyoq")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_fc0e3")
+"texture": ExtResource("4_fjrip")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_7jktm")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ryrav")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_eow3j")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_j5wjh")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vef74")
+"texture": ExtResource("5_smehm")
 }],
 "loop": true,
-"name": &"new_animation",
-"speed": 2.0
+"name": &"idle",
+"speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_mfdv2"]
-size = Vector2(8, 29)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qlg0r"]
+size = Vector2(18, 29.5)
 
 [node name="Player" type="CharacterBody2D" unique_id=209033023]
 script = ExtResource("1_g2els")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1091396271]
+scale = Vector2(0.35, 0.35)
 sprite_frames = SubResource("SpriteFrames_hve3p")
-animation = &"new_animation"
-autoplay = "new_animation"
-frame_progress = 0.94076526
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.10332382
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1648461871]
-position = Vector2(0, 4.5)
-shape = SubResource("RectangleShape2D_mfdv2")
+position = Vector2(-1, -0.25)
+shape = SubResource("RectangleShape2D_qlg0r")
+
+[node name="Muzzle" type="Marker2D" parent="." unique_id=1220656877]
+position = Vector2(14, -1)
