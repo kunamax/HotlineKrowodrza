@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://boqrlsbmw6eac"]
+
+[ext_resource type="Texture2D" uid="uid://cpeyd476ivpa5" path="res://assets/enemy_1/enemy_1_idle_down/enemy_1_idle_0000.png" id="1_5hhxc"]
+[ext_resource type="Texture2D" uid="uid://bk3tvowhbjkhu" path="res://assets/enemy_1/enemy_1_idle_down/enemy_1_idle_0001.png" id="2_d6lv2"]
+[ext_resource type="Texture2D" uid="uid://cauh4ad50g8lm" path="res://assets/enemy_1/enemy_1_idle_down/enemy_1_idle_0002.png" id="3_xkwnb"]
+[ext_resource type="Texture2D" uid="uid://xx60tk54yfg" path="res://assets/enemy_1/enemy_1_idle_down/enemy_1_idle_0003.png" id="4_rfv5r"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_udxf2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_5hhxc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_d6lv2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_xkwnb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_rfv5r")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kym8c"]
+size = Vector2(30, 29)
+
+[node name="Enemy_Spider" type="Node2D" unique_id=1366377129]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=998655922]
+scale = Vector2(0.1, 0.1)
+sprite_frames = SubResource("SpriteFrames_udxf2")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.3115355
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1580822810]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=306875145]
+position = Vector2(1, -0.5)
+shape = SubResource("RectangleShape2D_kym8c")

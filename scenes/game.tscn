@@ -2,6 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://p7kabvjhnfd0" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="Texture2D" uid="uid://dtndukj1oijud" path="res://assets/bg/assets.png" id="2_yqjtg"]
+[ext_resource type="PackedScene" path="res://scenes/key.tscn" id="3_lnu2h"]
+[ext_resource type="PackedScene" path="res://scenes/enemy_spider.tscn" id="4_lbhrr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lnu2h"]
 texture = ExtResource("2_yqjtg")
@@ -10,46 +12,30 @@ texture_region_size = Vector2i(255, 255)
 1:0/0 = 0
 2:0/0 = 0
 2:1/0 = 0
-2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-126.81232, -126.51697, 130.15973, -124.54784, 127.826965, 125.08374, -123.85858, 126.516815)
 1:1/0 = 0
-1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-126.81232, -126.51697, 130.15973, -124.54784, 127.826965, 125.08374, -123.85858, 126.516815)
 0:1/0 = 0
 0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-126.81232, -126.51697, 130.15973, -124.54784, 127.826965, 125.08374, -123.85858, 126.516815)
 3:1/0 = 0
-3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-126.81232, -126.51697, 130.15973, -124.54784, 127.826965, 125.08374, -123.85858, 126.516815)
 3:0/0 = 0
 4:0/0 = 0
 4:1/0 = 0
-4:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-126.81232, -126.51697, 130.15973, -124.54784, 127.826965, 125.08374, -123.85858, 126.516815)
 5:1/0 = 0
-5:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-126.81232, -126.51697, 130.15973, -124.54784, 127.826965, 125.08374, -123.85858, 126.516815)
 5:0/0 = 0
 6:1/0 = 0
-6:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-126.81232, -126.51697, 130.15973, -124.54784, 127.826965, 125.08374, -123.85858, 126.516815)
 6:0/0 = 0
 7:0/0 = 0
 7:1/0 = 0
 7:2/0 = 0
 0:2/0 = 0
-0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-127.62874, -127.932655, -81.69177, -124.32609, -82.449585, 129.53944, -124.12903, 124.9926)
 0:4/0 = 0
-0:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-127.62874, -127.932655, -15.398682, -126.50838, -16.156494, -38.602707, 39.921265, 15.20163, 127.06915, 18.990662, 127.826965, 125.08374, -21.643005, 126.69029, -124.12903, 124.9926)
 0:3/0 = 0
-0:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-127.62874, -127.932655, -81.69177, -124.32609, -82.232956, 56.969826, -21.643005, 126.69029, -124.12903, 124.9926)
 1:4/0 = 0
-1:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-130.88855, 12.261322, 127.06915, 18.990662, 127.826965, 125.08374, -124.12903, 124.9926)
 2:4/0 = 0
-2:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-130.88855, 12.261322, 127.06915, 18.990662, 127.826965, 125.08374, -124.12903, 124.9926)
 3:4/0 = 0
-3:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-130.88855, 12.261322, 127.06915, 18.990662, 127.826965, 125.08374, -124.12903, 124.9926)
 4:4/0 = 0
-4:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-130.88855, 12.261322, 127.06915, 18.990662, 127.826965, 125.08374, -124.12903, 124.9926)
 5:4/0 = 0
-5:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-130.88855, 12.261322, 127.06915, 18.990662, 127.826965, 125.08374, -124.12903, 124.9926)
 6:4/0 = 0
-6:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-130.88855, 12.261322, -32.318047, 14.832729, 15.368347, -33.055557, 16.12616, -125.50808, 122.21918, -127.7815, 127.826965, 125.08374, -124.12903, 124.9926)
 6:3/0 = 0
-6:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(79.94684, 52.792404, 81.915955, 6.517746, 124.25232, 9.471451, 127.826965, 125.08374, 20.872803, 124.66582)
 
 [sub_resource type="TileSet" id="TileSet_lbhrr"]
 physics_layer_0/collision_layer = 1
@@ -72,3 +58,9 @@ position = Vector2(0, 1)
 zoom = Vector2(4, 4)
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
+
+[node name="Key" parent="." unique_id=37798037 instance=ExtResource("3_lnu2h")]
+position = Vector2(-158, -59)
+
+[node name="Enemy_Spider" parent="." unique_id=1366377129 instance=ExtResource("4_lbhrr")]
+position = Vector2(-134, 57)

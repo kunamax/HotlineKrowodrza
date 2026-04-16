@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://qjj8hnlf2h8y"]
+
+[ext_resource type="Texture2D" uid="uid://bqd28hr0syide" path="res://assets/heart.png" id="1_v30as"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ycbwg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_v30as")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_krgnv"]
+radius = 6.0
+
+[node name="Heart" type="Area2D" unique_id=1787331980]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=197999876]
+scale = Vector2(0.1, 0.1)
+sprite_frames = SubResource("SpriteFrames_ycbwg")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=989107518]
+position = Vector2(0, -1)
+shape = SubResource("CircleShape2D_krgnv")

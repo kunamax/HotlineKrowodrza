@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://ceij4tan0q0gy"]
+
+[ext_resource type="Texture2D" uid="uid://bramm0eqpnwyh" path="res://assets/lock.png" id="1_60jus"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_s433i"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_60jus")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_40mgl"]
+size = Vector2(10, 13)
+
+[node name="Lock" type="Area2D" unique_id=980202579]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=977530359]
+scale = Vector2(0.1, 0.1)
+sprite_frames = SubResource("SpriteFrames_s433i")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=979590643]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_40mgl")
