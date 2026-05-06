@@ -9,6 +9,8 @@ var facing_vertical = 1
 @onready var sprite = $AnimatedSprite2D
 @onready var muzzle = $Muzzle
 
+func _ready():
+	add_to_group("player")
 
 func _physics_process(delta: float) -> void:
 	get_input()
