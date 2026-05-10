@@ -14,5 +14,6 @@ func _physics_process(delta):
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.has_method("take_damage"):
-		body.take_damage(damage)
+		var hit_dir: Vector2 = Vector2.RIGHT.rotated(rotation)
+		body.take_damage(damage, hit_dir)
 		queue_free()
