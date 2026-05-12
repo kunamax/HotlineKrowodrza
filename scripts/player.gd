@@ -1,22 +1,48 @@
 extends CharacterBody2D
 
 const SPEED = 150.0
+const DASH_SPEED = 360.0
+const DASH_DURATION = 0.13
+const DASH_COOLDOWN = 0.45
 
 var Bullet = load("res://scenes/bullet.tscn")
 var facing_horizontal = 1
 var facing_vertical = 1
+var last_move_dir = Vector2.RIGHT
+var dash_time_left = 0.0
+var dash_cooldown_left = 0.0
 
 @onready var sprite = $AnimatedSprite2D
 @onready var muzzle = $Muzzle
 
+func _ready():
+	motion_mode = MOTION_MODE_FLOATING
+	add_to_group("player")
 
 func _physics_process(delta: float) -> void:
+	if dash_cooldown_left > 0:
+		dash_cooldown_left -= delta
+
+	if dash_time_left > 0:
+		dash_time_left -= delta
+		move_and_slide()
+		return
+
 	get_input()
 	move_and_slide()
 
 
 func get_input():
 	var input_direction = Input.get_vector("Left", "Right", "Up", "Down")
+	if input_direction.length_squared() > 0.0001:
+		last_move_dir = input_direction.normalized()
+
+	if Input.is_action_just_pressed("Dash") and dash_cooldown_left <= 0 and dash_time_left <= 0:
+		dash_time_left = DASH_DURATION
+		dash_cooldown_left = DASH_COOLDOWN
+		velocity = last_move_dir * DASH_SPEED
+		return
+
 	velocity = input_direction * SPEED
 
 	if input_direction.x != 0:
@@ -41,7 +67,10 @@ func get_input():
 			$Muzzle.position.x = 0
 			$Muzzle.position.y = abs($Muzzle.position.y) * sign(input_direction.y)
 			anim = "walk_down"
-			
+	if facing_horizontal == 0 and facing_vertical == -1:
+		anim = "idle_down"
+	if facing_horizontal == 0 and facing_vertical == 1:
+		anim = "idle_up"
 
 	if sprite.animation != anim:
 		sprite.play(anim)

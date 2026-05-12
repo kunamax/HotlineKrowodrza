@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://boqrlsbmw6eac"]
 
 [ext_resource type="Texture2D" uid="uid://cpeyd476ivpa5" path="res://assets/enemy_1/enemy_1_idle_down/enemy_1_idle_0000.png" id="1_5hhxc"]
+[ext_resource type="Script" uid="uid://dxpe175g05uj8" path="res://scripts/enemy_spider.gd" id="1_d6lv2"]
 [ext_resource type="Texture2D" uid="uid://bk3tvowhbjkhu" path="res://assets/enemy_1/enemy_1_idle_down/enemy_1_idle_0001.png" id="2_d6lv2"]
 [ext_resource type="Texture2D" uid="uid://cauh4ad50g8lm" path="res://assets/enemy_1/enemy_1_idle_down/enemy_1_idle_0002.png" id="3_xkwnb"]
 [ext_resource type="Texture2D" uid="uid://xx60tk54yfg" path="res://assets/enemy_1/enemy_1_idle_down/enemy_1_idle_0003.png" id="4_rfv5r"]
@@ -28,7 +29,8 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kym8c"]
 size = Vector2(30, 29)
 
-[node name="Enemy_Spider" type="Node2D" unique_id=1366377129]
+[node name="Enemy_Spider" type="CharacterBody2D" unique_id=2052808003]
+script = ExtResource("1_d6lv2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=998655922]
 scale = Vector2(0.1, 0.1)
@@ -37,8 +39,13 @@ animation = &"idle"
 autoplay = "idle"
 frame_progress = 0.3115355
 
-[node name="Area2D" type="Area2D" parent="." unique_id=1580822810]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=306875145]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=306875145]
 position = Vector2(1, -0.5)
 shape = SubResource("RectangleShape2D_kym8c")
+
+[node name="HealthBar" type="ProgressBar" parent="." unique_id=682000893]
+offset_right = 4.0
+offset_bottom = 27.0
+max_value = 3.0
+step = 1.0
+value = 3.0

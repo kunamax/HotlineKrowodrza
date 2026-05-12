@@ -52,6 +52,22 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("14_i4ail")
+}],
+"loop": true,
+"name": &"idle_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("22_dt7fs")
+}],
+"loop": true,
+"name": &"idle_up",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_i4ail")
 }, {
 "duration": 1.0,
 "texture": ExtResource("15_a38lo")
@@ -144,9 +160,10 @@ size = Vector2(18, 29.5)
 script = ExtResource("1_g2els")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1091396271]
+z_index = 6
 scale = Vector2(0.07, 0.07)
 sprite_frames = SubResource("SpriteFrames_hve3p")
-animation = &"walk_up"
+animation = &"idle_up"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1648461871]
