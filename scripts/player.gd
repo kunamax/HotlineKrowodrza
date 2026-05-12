@@ -67,7 +67,10 @@ func get_input():
 			$Muzzle.position.x = 0
 			$Muzzle.position.y = abs($Muzzle.position.y) * sign(input_direction.y)
 			anim = "walk_down"
-			
+	if facing_horizontal == 0 and facing_vertical == -1:
+		anim = "idle_down"
+	if facing_horizontal == 0 and facing_vertical == 1:
+		anim = "idle_up"
 
 	if sprite.animation != anim:
 		sprite.play(anim)
