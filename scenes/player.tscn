@@ -138,7 +138,18 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qlg0r"]
-size = Vector2(18, 29.5)
+size = Vector2(11, 18)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hp_bg"]
+bg_color = Color(0.12, 0.12, 0.12, 0.95)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.05, 0.05, 0.05, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hp_fill"]
+bg_color = Color(0.82, 0.12, 0.12, 1)
 
 [node name="Player" type="CharacterBody2D" unique_id=209033023]
 collision_layer = 2
@@ -160,10 +171,13 @@ shape = SubResource("RectangleShape2D_qlg0r")
 position = Vector2(14, -1)
 
 [node name="HealthBar" type="ProgressBar" parent="." unique_id=682000894]
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = -16.0
-max_value = 3.0
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = -10.0
+theme_override_styles/background = SubResource("StyleBoxFlat_hp_bg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_hp_fill")
+max_value = 6.0
 step = 1.0
-value = 3.0
+value = 6.0
+show_percentage = false

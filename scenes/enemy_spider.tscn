@@ -27,7 +27,18 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kym8c"]
-size = Vector2(30, 29)
+size = Vector2(17, 16)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hp_bg"]
+bg_color = Color(0.12, 0.12, 0.12, 0.95)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.05, 0.05, 0.05, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hp_fill"]
+bg_color = Color(0.82, 0.12, 0.12, 1)
 
 [node name="Enemy_Spider" type="CharacterBody2D" unique_id=2052808003]
 collision_layer = 4
@@ -47,8 +58,13 @@ position = Vector2(1, -0.5)
 shape = SubResource("RectangleShape2D_kym8c")
 
 [node name="HealthBar" type="ProgressBar" parent="." unique_id=682000893]
-offset_right = 4.0
-offset_bottom = 27.0
-max_value = 3.0
+offset_left = -10.0
+offset_top = -12.0
+offset_right = 10.0
+offset_bottom = -10.0
+theme_override_styles/background = SubResource("StyleBoxFlat_hp_bg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_hp_fill")
+max_value = 5.0
 step = 1.0
-value = 3.0
+value = 5.0
+show_percentage = false
