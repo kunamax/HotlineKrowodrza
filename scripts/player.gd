@@ -5,6 +5,9 @@ const MUZZLE_OFFSET = 14.0
 
 var MAX_HEALTH = 6
 var HEALTH = 6
+var keys := 0
+
+signal keys_changed(key_count: int)
 
 var Bullet = load("res://scenes/bullet.tscn")
 var facing_horizontal = 1
@@ -97,6 +100,11 @@ func take_damage(amount):
 
 	if HEALTH <= 0:
 		die()
+
+
+func collect_key() -> void:
+	keys += 1
+	keys_changed.emit(keys)
 
 
 func die():
