@@ -2,15 +2,21 @@ extends CharacterBody2D
 
 const SPEED = 150.0
 
+var MAX_HEALTH = 3
+var HEALTH = 3
+
 var Bullet = load("res://scenes/bullet.tscn")
 var facing_horizontal = 1
 var facing_vertical = 1
 
 @onready var sprite = $AnimatedSprite2D
 @onready var muzzle = $Muzzle
+@onready var hp_bar = $HealthBar
 
 func _ready():
 	add_to_group("player")
+	hp_bar.max_value = MAX_HEALTH
+	hp_bar.value = HEALTH
 
 func _physics_process(delta: float) -> void:
 	get_input()
@@ -66,4 +72,19 @@ func shoot():
 		b.rotation = PI / 2.0
 	else:
 		b.rotation = 3.0 * PI / 2.0
+
+
+func take_damage(amount):
+	HEALTH -= amount
+	hp_bar.value = HEALTH
+	modulate = Color(1, 0, 0)
+	await get_tree().create_timer(0.1).timeout
+	modulate = Color(1, 1, 1)
+
+	if HEALTH <= 0:
+		die()
+
+
+func die():
+	get_tree().reload_current_scene()
 	

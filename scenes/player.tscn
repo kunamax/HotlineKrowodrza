@@ -141,6 +141,9 @@ animations = [{
 size = Vector2(18, 29.5)
 
 [node name="Player" type="CharacterBody2D" unique_id=209033023]
+collision_layer = 2
+collision_mask = 1
+motion_mode = 1
 script = ExtResource("1_g2els")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1091396271]
@@ -155,3 +158,12 @@ shape = SubResource("RectangleShape2D_qlg0r")
 
 [node name="Muzzle" type="Marker2D" parent="." unique_id=1220656877]
 position = Vector2(14, -1)
+
+[node name="HealthBar" type="ProgressBar" parent="." unique_id=682000894]
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = -16.0
+max_value = 3.0
+step = 1.0
+value = 3.0
