@@ -12,4 +12,8 @@ func _on_body_entered(body: Node2D) -> void:
 	if body.has_method("collect_key"):
 		body.collect_key()
 
+	var game := get_tree().current_scene as Node2D
+	if game != null and game.has_method("save_game"):
+		game.save_game()
+
 	queue_free()

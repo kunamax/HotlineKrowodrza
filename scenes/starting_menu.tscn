@@ -74,7 +74,7 @@ theme_override_font_sizes/font_size = 64
 theme_override_styles/normal = SubResource("StyleBoxFlat_kp2u6")
 theme_override_styles/hover = SubResource("StyleBoxFlat_6gt2g")
 theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_ec4vr")
-text = "Start"
+text = "START"
 
 [node name="Button2" type="Button" parent="VBoxContainer" unique_id=1040076919]
 layout_mode = 2
@@ -86,9 +86,21 @@ theme_override_font_sizes/font_size = 64
 theme_override_styles/normal = SubResource("StyleBoxFlat_kp2u6")
 theme_override_styles/hover = SubResource("StyleBoxFlat_6gt2g")
 theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_ec4vr")
-text = "Options"
+text = "START NEW GAME"
 
 [node name="Button3" type="Button" parent="VBoxContainer" unique_id=1448326551]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.14819999, 0.18360335, 0.26, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_ncxof")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxFlat_kp2u6")
+theme_override_styles/hover = SubResource("StyleBoxFlat_6gt2g")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_ec4vr")
+text = "OPTIONS"
+
+[node name="Button4" type="Button" parent="VBoxContainer" unique_id=328165920]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0.14819999, 0.18360335, 0.26, 1)

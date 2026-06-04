@@ -108,4 +108,5 @@ func collect_key() -> void:
 
 
 func die():
+	SaveManager.delete_save()
 	get_tree().reload_current_scene()

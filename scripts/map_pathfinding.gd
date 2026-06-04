@@ -4,8 +4,8 @@ const REGION_PADDING := 18
 const MAX_REGION_SIZE := 64
 const TILE_SIZE := Vector2(255, 255)
 
-var tile_map: TileMap
-var tile_map_overlay: TileMap
+var tile_map: TileMapLayer
+var tile_map_overlay: TileMapLayer
 var astar := AStarGrid2D.new()
 var cell_size := Vector2.ONE
 var blocked_cache: Dictionary = {}
@@ -13,8 +13,8 @@ var cached_region := Rect2i()
 var grid_ready := false
 
 func _ready() -> void:
-	tile_map = get_parent().get_node("TileMap")
-	tile_map_overlay = tile_map.get_node("TileMap2")
+	tile_map = get_parent().get_node("Layer1") as TileMapLayer
+	tile_map_overlay = get_parent().get_node("Layer2") as TileMapLayer
 	cell_size = TILE_SIZE * tile_map.scale
 	astar.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
 	astar.cell_size = cell_size
@@ -104,8 +104,8 @@ func _cell_has_wall(cell: Vector2i) -> bool:
 	return _tilemap_cell_has_collision(tile_map_overlay, overlay_cell)
 
 
-func _tilemap_cell_has_collision(tilemap: TileMap, cell: Vector2i) -> bool:
-	var data := tilemap.get_cell_tile_data(0, cell)
+func _tilemap_cell_has_collision(tilemap: TileMapLayer, cell: Vector2i) -> bool:
+	var data := tilemap.get_cell_tile_data(cell)
 	if data == null:
 		return false
 	return data.get_collision_polygons_count(0) > 0

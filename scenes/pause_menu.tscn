@@ -73,7 +73,7 @@ theme_override_font_sizes/font_size = 64
 theme_override_styles/normal = SubResource("StyleBoxFlat_kp2u6")
 theme_override_styles/hover = SubResource("StyleBoxFlat_6gt2g")
 theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_ec4vr")
-text = "Start"
+text = "RESUME"
 
 [node name="Button2" type="Button" parent="VBoxContainer" unique_id=1692080460]
 layout_mode = 2
@@ -97,7 +97,7 @@ theme_override_font_sizes/font_size = 64
 theme_override_styles/normal = SubResource("StyleBoxFlat_kp2u6")
 theme_override_styles/hover = SubResource("StyleBoxFlat_6gt2g")
 theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_ec4vr")
-text = "Quit"
+text = "MAIN MENU"
 
 [node name="Label" type="Label" parent="." unique_id=29931424]
 layout_mode = 1

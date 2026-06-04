@@ -1,13 +1,15 @@
 extends Control
 
+const STARTING_MENU_SCENE := "res://scenes/starting_menu.tscn"
+
 @onready var resume_button: Button = $VBoxContainer/Button
-@onready var quit_button: Button = $VBoxContainer/Button3
+@onready var main_menu_button: Button = $VBoxContainer/Button3
 
 
 func _ready() -> void:
 	visible = false
 	resume_button.pressed.connect(_on_resume_pressed)
-	quit_button.pressed.connect(_on_quit_pressed)
+	main_menu_button.pressed.connect(_on_main_menu_pressed)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -27,6 +29,7 @@ func toggle_pause() -> void:
 func open_pause() -> void:
 	visible = true
 	get_tree().paused = true
+	_save_game()
 
 
 func close_pause() -> void:
@@ -38,5 +41,17 @@ func _on_resume_pressed() -> void:
 	close_pause()
 
 
-func _on_quit_pressed() -> void:
-	get_tree().quit()
+func _on_main_menu_pressed() -> void:
+	_save_game()
+	get_tree().paused = false
+	get_tree().change_scene_to_file(STARTING_MENU_SCENE)
+
+
+func _save_game() -> void:
+	var game := get_tree().current_scene as Node2D
+	if game == null:
+		return
+	if game.has_method("save_game"):
+		game.save_game()
+	else:
+		SaveManager.save_from_game(game)

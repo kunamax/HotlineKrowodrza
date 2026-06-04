@@ -354,4 +354,7 @@ func take_damage(amount):
 
 
 func die():
+	var game := get_tree().current_scene as Node2D
+	if game != null and game.has_method("save_game"):
+		game.save_game()
 	queue_free()
