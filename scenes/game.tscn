@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://boqrlsbmw6eac" path="res://scenes/enemy_spider.tscn" id="4_lbhrr"]
 [ext_resource type="Script" uid="uid://bhehdgj11iahr" path="res://scripts/map_pathfinding.gd" id="5_path"]
 [ext_resource type="PackedScene" uid="uid://dep828jn5k2t5" path="res://scenes/hud.tscn" id="6_hud"]
+[ext_resource type="PackedScene" uid="uid://c8kpaus3m3nu0" path="res://scenes/pause_menu.tscn" id="7_pause"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lnu2h"]
 texture = ExtResource("2_yqjtg")
@@ -117,6 +118,12 @@ scale = Vector2(0.54, 0.54)
 script = ExtResource("5_path")
 
 [node name="HUD" parent="." unique_id=2085941033 instance=ExtResource("6_hud")]
+
+[node name="PauseLayer" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="pause_menu" parent="PauseLayer" instance=ExtResource("7_pause")]
+visible = false
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=2144111508]
 visible = false
