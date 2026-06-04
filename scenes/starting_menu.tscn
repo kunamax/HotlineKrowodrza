@@ -1,0 +1,116 @@
+[gd_scene format=3 uid="uid://dexmkwq1lqdl2"]
+
+[ext_resource type="Texture2D" uid="uid://rmllebatxixa" path="res://assets/bg/main_menu_bg.png" id="1_cxv6e"]
+[ext_resource type="Script" uid="uid://bwcp78lcp0bbk" path="res://scripts/starting_menu.gd" id="1_menu"]
+[ext_resource type="FontFile" uid="uid://ddps0wvowff7j" path="res://assets/fonts/ARCADECLASSIC.TTF" id="2_ncxof"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ncxof"]
+texture = ExtResource("1_cxv6e")
+modulate_color = Color(0.5, 0.5, 0.5, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kp2u6"]
+bg_color = Color(0.51, 0.90199983, 1, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6gt2g"]
+bg_color = Color(0.7, 0.93999994, 1, 1)
+border_color = Color(1, 0.7316667, 0.3, 1)
+border_blend = true
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ec4vr"]
+bg_color = Color(0.76, 0.9519999, 1, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[node name="starting_menu" type="Control" unique_id=1304340057]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_menu")
+
+[node name="Panel" type="Panel" parent="." unique_id=650854703]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_ncxof")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1564008446]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -344.0
+offset_top = -145.0
+offset_right = 344.0
+offset_bottom = 255.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+
+[node name="Button" type="Button" parent="VBoxContainer" unique_id=2067299752]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.14819999, 0.18360335, 0.26, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_ncxof")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxFlat_kp2u6")
+theme_override_styles/hover = SubResource("StyleBoxFlat_6gt2g")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_ec4vr")
+text = "Start"
+
+[node name="Button2" type="Button" parent="VBoxContainer" unique_id=1040076919]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.14819999, 0.18360335, 0.26, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_ncxof")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxFlat_kp2u6")
+theme_override_styles/hover = SubResource("StyleBoxFlat_6gt2g")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_ec4vr")
+text = "Options"
+
+[node name="Button3" type="Button" parent="VBoxContainer" unique_id=1448326551]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.14819999, 0.18360335, 0.26, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_ncxof")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxFlat_kp2u6")
+theme_override_styles/hover = SubResource("StyleBoxFlat_6gt2g")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_ec4vr")
+text = "Quit"
+
+[node name="Label" type="Label" parent="." unique_id=586644712]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -528.5
+offset_top = 109.0
+offset_right = 528.5
+offset_bottom = 219.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.63434, 0.8919244, 0.88754535, 1)
+theme_override_fonts/font = ExtResource("2_ncxof")
+theme_override_font_sizes/font_size = 120
+text = "HOTLINE KROWODRZA .INC"
