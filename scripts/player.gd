@@ -108,5 +108,10 @@ func collect_key() -> void:
 
 
 func die():
-	SaveManager.delete_save()
-	get_tree().reload_current_scene()
+	velocity = Vector2.ZERO
+	set_physics_process(false)
+	set_process_input(false)
+
+	var game := get_tree().current_scene
+	if game != null and game.has_method("show_death_menu"):
+		game.show_death_menu()

@@ -13,10 +13,17 @@ func _ready() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if _is_death_screen_visible():
+		return
 	if not event.is_action_pressed("ui_cancel") or event.is_echo():
 		return
 	toggle_pause()
 	get_viewport().set_input_as_handled()
+
+
+func _is_death_screen_visible() -> bool:
+	var death_screen := get_tree().get_first_node_in_group("death_screen")
+	return death_screen != null and death_screen.visible
 
 
 func toggle_pause() -> void:

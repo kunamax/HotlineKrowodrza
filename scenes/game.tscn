@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dep828jn5k2t5" path="res://scenes/hud.tscn" id="6_hud"]
 [ext_resource type="PackedScene" uid="uid://dbo7uj8lvyjrd" path="res://scenes/pause_menu.tscn" id="7_pause"]
 [ext_resource type="Script" path="res://scripts/game.gd" id="8_game"]
+[ext_resource type="PackedScene" uid="uid://dm6xb6lgwvgvj" path="res://scenes/you_died_menu.tscn" id="9_death"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lnu2h"]
 texture = ExtResource("2_yqjtg")
@@ -125,7 +126,12 @@ layer = 10
 [node name="pause_menu" parent="PauseLayer" unique_id=1722832539 instance=ExtResource("7_pause")]
 visible = false
 
-[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=2144111508]
+[node name="DeathLayer" type="CanvasLayer" parent="." unique_id=1847291051]
+layer = 11
+
+[node name="you_died_menu" parent="DeathLayer" unique_id=716909411 instance=ExtResource("9_death")]
 visible = false
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=2144111508]
 z_index = 8
 color = Color(0.080783345, 0.080783345, 0.080783345, 1)

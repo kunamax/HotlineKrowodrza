@@ -4,6 +4,8 @@ const AUTOSAVE_INTERVAL := 10.0
 
 var _autosave_timer: Timer
 
+@onready var _death_menu: Control = $DeathLayer/you_died_menu
+
 
 func _ready() -> void:
 	_setup_autosave()
@@ -29,6 +31,13 @@ func _on_autosave_timeout() -> void:
 
 func save_game() -> void:
 	SaveManager.save_from_game(self)
+
+
+func show_death_menu() -> void:
+	SaveManager.delete_save()
+	if _autosave_timer != null:
+		_autosave_timer.stop()
+	_death_menu.show_menu()
 
 
 func _notification(what: int) -> void:
