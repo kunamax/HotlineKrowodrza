@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://bbcnq0tvj46yq"]
 
+[ext_resource type="Script" path="res://scripts/key.gd" id="1_key_script"]
 [ext_resource type="Texture2D" uid="uid://cbenddagj361t" path="res://assets/key.png" id="1_yk2u2"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_fttkb"]
@@ -16,7 +17,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wy8tx"]
 size = Vector2(10, 11)
 
-[node name="Area2D" type="Area2D" unique_id=37798037]
+[node name="Key" type="Area2D" unique_id=37798037]
+collision_mask = 2
+script = ExtResource("1_key_script")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=960243695]
 scale = Vector2(0.1, 0.1)
