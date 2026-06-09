@@ -2,13 +2,11 @@ extends CharacterBody2D
 
 enum State { PATROL, CHASE, ATTACK }
 
-const MUZZLE_OFFSET := 14.0
-
 var MAX_HEALTH = 5
 var HEALTH = 5
 
 var speed = 65
-var chase_speed = 55
+var chase_speed = 70
 var attack_lunge_speed = 110
 
 var direction = 1
@@ -17,11 +15,6 @@ var state = State.PATROL
 
 var detect_range = 250
 var lose_range = 350
-var shoot_range = 220
-var shoot_cooldown = 1.5
-var shoot_cooldown_timer = 0.0
-
-var Bullet = load("res://scenes/bullet.tscn")
 
 var attack_cooldown = 1.2
 var attack_cooldown_timer = 0.0
@@ -31,8 +24,8 @@ var attack_recoil_time = 0.28
 var attack_recoil_speed = 75
 var attack_timer = 0.0
 var attack_lunging = false
-var attack_damage = 1
 var attack_hit = false
+var attack_damage = 2
 
 var pathfinding: Node = null
 var current_path: PackedVector2Array = []
@@ -54,7 +47,6 @@ var is_stuttering := false
 
 @onready var hp_bar = $HealthBar
 @onready var sprite = $AnimatedSprite2D
-@onready var muzzle = $Muzzle
 
 func _ready():
 	hp_bar.max_value = MAX_HEALTH
@@ -67,8 +59,6 @@ func _ready():
 func _physics_process(delta):
 	if attack_cooldown_timer > 0.0:
 		attack_cooldown_timer -= delta
-	if shoot_cooldown_timer > 0.0:
-		shoot_cooldown_timer -= delta
 
 	path_recalc_timer -= delta
 	path_force_cooldown_timer = max(path_force_cooldown_timer - delta, 0.0)
@@ -91,6 +81,11 @@ func _physics_process(delta):
 	var previous_position := global_position
 	move_and_slide()
 	_update_sprite_glitch()
+	_update_animation()
+	if state == State.PATROL:
+		sprite.flip_h = direction < 0
+	else:
+		_face_player()
 	_handle_stuck(previous_position, delta)
 
 	if state == State.PATROL and get_slide_collision_count() > 0:
@@ -156,20 +151,7 @@ func _chase_player():
 		return
 
 	var to_player = player.global_position - global_position
-	var distance = to_player.length()
 	_face_player()
-	_update_muzzle()
-
-	if distance <= shoot_range and distance > _get_attack_start_range() and shoot_cooldown_timer <= 0.0:
-		_shoot_at_player()
-
-	# Pathfinding stops short near the player — go direct when close
-	if distance <= 90.0:
-		if distance > _get_attack_start_range():
-			velocity = to_player.normalized() * chase_speed
-		else:
-			velocity = Vector2.ZERO
-		return
 
 	_request_path(player.global_position)
 	if current_path.is_empty():
@@ -304,40 +286,23 @@ func _get_hit_range() -> float:
 
 
 func _get_attack_start_range() -> float:
-	# Only start the attack when already close — lunge covers the last bit
 	return _get_hit_range() + 8.0
 
 
 func _face_player():
 	if player:
-		sprite.flip_h = player.global_position.x < global_position.x
+		sprite.flip_h = player.global_position.x > global_position.x
 	else:
-		sprite.flip_h = direction < 0
+		sprite.flip_h = direction > 0
 
 
-func _update_muzzle() -> void:
-	if player == null:
-		return
+func _update_animation() -> void:
+	var anim := "idle"
+	if state == State.ATTACK:
+		anim = "attack"
 
-	var aim_direction: Vector2 = (player.global_position - global_position).normalized()
-	muzzle.position = aim_direction * MUZZLE_OFFSET
-
-
-func _shoot_at_player() -> void:
-	if player == null:
-		return
-
-	var aim_direction: Vector2 = (player.global_position - muzzle.global_position).normalized()
-	if aim_direction.length() < 0.1:
-		return
-
-	var bullet = Bullet.instantiate()
-	bullet.hits_players = true
-	bullet.collision_mask = 3
-	get_tree().current_scene.add_child(bullet)
-	bullet.global_position = muzzle.global_position
-	bullet.rotation = aim_direction.angle()
-	shoot_cooldown_timer = shoot_cooldown
+	if sprite.animation != anim:
+		sprite.play(anim)
 
 
 func _update_malfunction(delta: float) -> void:

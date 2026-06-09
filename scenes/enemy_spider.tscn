@@ -57,6 +57,9 @@ frame_progress = 0.3115355
 position = Vector2(1, -0.5)
 shape = SubResource("RectangleShape2D_kym8c")
 
+[node name="Muzzle" type="Marker2D" parent="."]
+position = Vector2(14, -1)
+
 [node name="HealthBar" type="ProgressBar" parent="." unique_id=682000893]
 offset_left = -10.0
 offset_top = -12.0

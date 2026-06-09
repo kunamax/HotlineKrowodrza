@@ -2,6 +2,7 @@ extends Area2D
 
 var speed = 1500
 var damage = 1
+var hits_players := false
 
 func _physics_process(delta):
 	var direction = Vector2.RIGHT.rotated(rotation)
@@ -9,6 +10,12 @@ func _physics_process(delta):
 
 
 func _on_body_entered(body: Node2D) -> void:
+	if hits_players:
+		if body.is_in_group("player") and body.has_method("take_damage"):
+			body.take_damage(damage)
+		queue_free()
+		return
+
 	if body.is_in_group("player"):
 		return
 
