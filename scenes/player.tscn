@@ -29,6 +29,7 @@
 [ext_resource type="Texture2D" uid="uid://byb1arnkvoycp" path="res://assets/pc/pc_walk_up/walk_up_0005.png" id="27_md1ol"]
 [ext_resource type="Texture2D" uid="uid://kupwva5vmrv4" path="res://assets/pc/pc_walk_up/walk_up_0006.png" id="28_bj30b"]
 [ext_resource type="Texture2D" uid="uid://c8405kay5u35k" path="res://assets/pc/pc_walk_up/walk_up_0007.png" id="29_jc3p3"]
+[ext_resource type="Texture2D" uid="uid://bbcw44g7lil47" path="res://assets/2d_lights_and_shadows_neutral_point_light.png" id="30_light"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_hve3p"]
 animations = [{
@@ -169,6 +170,15 @@ shape = SubResource("RectangleShape2D_qlg0r")
 
 [node name="Muzzle" type="Marker2D" parent="." unique_id=1220656877]
 position = Vector2(14, -1)
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+scale = Vector2(1.2, 1.2)
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 1.25
+texture = ExtResource("30_light")
+texture_scale = 0.75
+energy = 1.15
 
 [node name="HealthBar" type="ProgressBar" parent="." unique_id=682000894]
 offset_left = -12.0

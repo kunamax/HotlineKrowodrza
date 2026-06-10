@@ -30,6 +30,25 @@ func save_from_game(game: Node2D) -> bool:
 	return _write_save(data)
 
 
+func prepare_game_entry(game: Node2D, spawn_position: Vector2 = Vector2.ZERO) -> bool:
+	var player := game.get_node_or_null("Player") as CharacterBody2D
+	if player == null:
+		return false
+
+	var data := {
+		"version": 1,
+		"player": {
+			"x": spawn_position.x,
+			"y": spawn_position.y,
+			"health": player.HEALTH,
+			"keys": player.keys,
+		},
+		"enemies": [],
+		"keys": [{"name": KEY_NODE_NAME, "collected": player.keys > 0}],
+	}
+	return _write_save(data)
+
+
 func load_into_game(game: Node2D) -> bool:
 	var data := _read_save()
 	if data.is_empty():
