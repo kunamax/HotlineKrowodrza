@@ -32,13 +32,13 @@ for i, line in enumerate(lines):
     next_line = lines[i + 1] if i + 1 < len(lines) else ""
     if "physics_layer_0" not in next_line:
         atlas_line = line.split("/0 = 0")[0]
-        out.append(f"{atlas_line}/{poly_suffix}")
+        out.append(f"{atlas_line}/0/{poly_suffix}")
         physics_count += 1
-        next_line = f"{atlas_line}/{poly_suffix}"
+        next_line = f"{atlas_line}/0/{poly_suffix}"
 
     if "occlusion_layer_0" not in next_line:
         atlas_line = line.split("/0 = 0")[0]
-        out.append(f"{atlas_line}/{occlusion_suffix}")
+        out.append(f"{atlas_line}/0/{occlusion_suffix}")
         occlusion_count += 1
 
 text2 = "\n".join(out)
