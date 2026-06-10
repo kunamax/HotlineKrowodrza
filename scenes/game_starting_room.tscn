@@ -1,9 +1,94 @@
 [gd_scene format=4 uid="uid://c82oty47vgcym"]
 
-[ext_resource type="Texture2D" uid="uid://dtndukj1oijud" path="res://assets/bg/assets.png" id="1_q1xd2"]
+[ext_resource type="Texture2D" uid="uid://4qhtxbodkumw" path="res://assets/npc/npc_03.png" id="1_jb2cd"]
+[ext_resource type="Texture2D" uid="uid://cgodsqasyp37y" path="res://assets/npc/npc_01.png" id="2_15h7b"]
+[ext_resource type="Texture2D" uid="uid://ckx5561hm7me3" path="res://assets/npc/npc_02.png" id="3_ldimy"]
+[ext_resource type="PackedScene" uid="uid://p7kabvjhnfd0" path="res://scenes/player.tscn" id="4_fdedf"]
+[ext_resource type="Texture2D" uid="uid://bbcw44g7lil47" path="res://assets/2d_lights_and_shadows_neutral_point_light.png" id="5_rmj7e"]
+[ext_resource type="Texture2D" uid="uid://ccy32p8sewqb7" path="res://assets/bg/assets-gray.png" id="6_uiebh"]
+[ext_resource type="Script" path="res://scripts/npc.gd" id="7_npc"]
+[ext_resource type="PackedScene" uid="uid://dbo7uj8lvyjrd" path="res://scenes/pause_menu.tscn" id="8_pause"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_le16w"]
-texture = ExtResource("1_q1xd2")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3nihm"]
+texture = ExtResource("6_uiebh")
+texture_region_size = Vector2i(255, 255)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+7:1/0 = 0
+0:2/0 = 0
+2:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+6:2/0 = 0
+7:2/0 = 0
+0:3/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+6:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+4:4/0 = 0
+5:4/0 = 0
+6:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+3:5/0 = 0
+4:5/0 = 0
+5:5/0 = 0
+6:5/0 = 0
+0:6/0 = 0
+1:6/0 = 0
+2:6/0 = 0
+3:6/0 = 0
+4:6/0 = 0
+6:6/0 = 0
+7:6/0 = 0
+0:7/0 = 0
+1:7/0 = 0
+2:7/0 = 0
+3:7/0 = 0
+4:7/0 = 0
+5:7/0 = 0
+6:7/0 = 0
+7:7/0 = 0
+8:7/0 = 0
+0:8/0 = 0
+1:8/0 = 0
+2:8/0 = 0
+3:8/0 = 0
+4:8/0 = 0
+5:8/0 = 0
+6:8/0 = 0
+7:8/0 = 0
+8:8/0 = 0
+10:8/0 = 0
+6:9/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_je1rp"]
+tile_size = Vector2i(255, 255)
+terrain_set_0/mode = 0
+terrain_set_0/terrain_0/name = "Terrain 0"
+terrain_set_0/terrain_0/color = Color(1, 0, 0.1833334, 1)
+sources/0 = SubResource("TileSetAtlasSource_3nihm")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fn075"]
+texture = ExtResource("6_uiebh")
 texture_region_size = Vector2i(255, 255)
 0:0/0 = 0
 1:0/0 = 0
@@ -651,13 +736,9 @@ texture_region_size = Vector2i(255, 255)
 124:6/0 = 0
 125:6/0 = 0
 0:7/0 = 0
-0:7/0/terrain_set = 0
 1:7/0 = 0
-1:7/0/terrain_set = 0
 2:7/0 = 0
-2:7/0/terrain_set = 0
 3:7/0 = 0
-3:7/0/terrain_set = 0
 4:7/0 = 0
 5:7/0 = 0
 6:7/0 = 0
@@ -768,13 +849,9 @@ texture_region_size = Vector2i(255, 255)
 124:7/0 = 0
 125:7/0 = 0
 0:8/0 = 0
-0:8/0/terrain_set = 0
 1:8/0 = 0
-1:8/0/terrain_set = 0
 2:8/0 = 0
-2:8/0/terrain_set = 0
 3:8/0 = 0
-3:8/0/terrain_set = 0
 4:8/0 = 0
 5:8/0 = 0
 6:8/0 = 0
@@ -885,13 +962,9 @@ texture_region_size = Vector2i(255, 255)
 124:8/0 = 0
 125:8/0 = 0
 0:9/0 = 0
-0:9/0/terrain_set = 0
 1:9/0 = 0
-1:9/0/terrain_set = 0
 2:9/0 = 0
-2:9/0/terrain_set = 0
 3:9/0 = 0
-3:9/0/terrain_set = 0
 4:9/0 = 0
 5:9/0 = 0
 6:9/0 = 0
@@ -8708,19 +8781,92 @@ texture_region_size = Vector2i(255, 255)
 102:151/0 = 0
 103:151/0 = 0
 
-[sub_resource type="TileSet" id="TileSet_je1rp"]
-terrain_set_0/mode = 0
-terrain_set_0/terrain_0/name = "Terrain 0"
-terrain_set_0/terrain_0/color = Color(1, 0, 0.1833334, 1)
-sources/1 = SubResource("TileSetAtlasSource_le16w")
+[sub_resource type="TileSet" id="TileSet_3xtta"]
+tile_size = Vector2i(255, 255)
+sources/0 = SubResource("TileSetAtlasSource_fn075")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_npc"]
+radius = 35.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_op2un"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_jb2cd")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_15h7b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ldimy")
+}],
+"loop": true,
+"name": &"waving",
+"speed": 5.0
+}]
 
 [node name="Node2D" type="Node2D" unique_id=792395120]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=505887598]
 scale = Vector2(0.1, 0.1)
-tile_map_data = PackedByteArray("AAAHAAcAAQABAAgAAAAXAAcAAQABAAgAAAAnAAcAAQABAAgAAAAHABcAAQABAAgAAAAXABcAAQACAAgAAAAnABcAAQACAAgAAAAXACcAAQACAAgAAAAHACcAAQABAAgAAAAXADcAAQABAAgAAAAnACcAAQABAAgAAAA3AAcAAQACAAgAAAA3ABcAAQACAAgAAAA3ACcAAQACAAgAAABHABcAAQACAAgAAAAHADcAAQACAAgAAAAnADcAAQAEAAgAAAA3ADcAAQABAAgAAABHADcAAQABAAgAAABHACcAAQABAAgAAABXACcAAQABAAgAAABHAEcAAQABAAgAAAA=")
+tile_map_data = PackedByteArray("AAAAAAAAAAACAAgAAAAAAAEAAAACAAgAAAABAAEAAAABAAgAAAABAAIAAAACAAgAAAACAAMAAAABAAgAAAADAAMAAAABAAgAAAADAAQAAAACAAgAAAAEAAQAAAACAAgAAAAEAAMAAAACAAgAAAAEAAIAAAABAAgAAAADAAIAAAACAAgAAAACAAIAAAACAAgAAAABAAAAAAACAAgAAAACAAAAAAACAAgAAAADAAAAAAACAAgAAAAEAAAAAAACAAgAAAAFAAAAAAACAAgAAAAGAAAAAAACAAgAAAAHAAAAAAACAAgAAAAGAAEAAAACAAgAAAAFAAEAAAABAAgAAAAEAAEAAAABAAgAAAADAAEAAAACAAgAAAACAAEAAAACAAgAAAAHAAEAAAACAAgAAAAHAAIAAAACAAgAAAAIAAIAAAABAAgAAAAGAAMAAAABAAgAAAAFAAMAAAABAAgAAAAAAAMAAAACAAgAAAAAAAIAAAACAAgAAAAAAAQAAAABAAgAAAAAAAUAAAABAAgAAAABAAUAAAABAAgAAAABAAQAAAABAAgAAAACAAQAAAABAAgAAAABAAMAAAACAAgAAAAGAAQAAAABAAgAAAAHAAQAAAACAAgAAAAIAAQAAAACAAgAAAAIAAMAAAACAAgAAAAJAAMAAAABAAgAAAAKAAMAAAABAAgAAAAKAAIAAAABAAgAAAAKAAEAAAACAAgAAAAJAAAAAAACAAgAAAAIAAAAAAACAAgAAAAKAAAAAAACAAgAAAAJAAEAAAACAAgAAAAHAAMAAAACAAgAAAAKAAQAAAACAAgAAAAKAAUAAAACAAgAAAAJAAIAAAABAAgAAAAIAAEAAAACAAgAAAAGAAIAAAACAAgAAAAFAAIAAAABAAgAAAAFAAQAAAACAAgAAAAFAAUAAAACAAgAAAAEAAUAAAACAAgAAAAGAAUAAAACAAgAAAAHAAUAAAACAAgAAAAIAAUAAAACAAgAAAAJAAUAAAACAAgAAAAJAAQAAAACAAgAAAACAAUAAAACAAgAAAADAAUAAAACAAgAAAA=")
 tile_set = SubResource("TileSet_je1rp")
+rendering_quadrant_size = 255
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=1097798640]
+[node name="TileMapLayer2" type="TileMapLayer" parent="." unique_id=451540500]
+scale = Vector2(0.099999994, 0.099999994)
+tile_map_data = PackedByteArray("AAAAAP//AAAAAAEAAAABAP//AAABAAEAAAADAP//AAABAAEAAAAEAP//AAABAAEAAAAFAP//AAAEAAEAAAAGAP//AAAEAAEAAAAHAP//AAAEAAEAAAAIAP//AAAEAAEAAAAJAP//AAAEAAEAAAAKAP//AAAGAAEAAAAAAAAAAAAAAAIAAAAAAAEAAAAAAAIAAAAAAAIAAAAAAAIAAAAAAAMAAAAAAAIAAAAAAAQAAAAAAAMAAAAAAAUAAAAAAAQAAAAFAAUAAAADAAQAAAABAAUAAAABAAQAAAACAAUAAAABAAQAAAADAAUAAAABAAQAAAAEAAUAAAABAAQAAAAGAAUAAAABAAQAAAAHAAUAAAABAAQAAAAIAAUAAAABAAQAAAAJAAUAAAABAAQAAAAKAAUAAAAAAAQAABAKAAAAAAAAAAIAABAKAAEAAAAAAAIAABAKAAIAAAAAAAIAABAKAAMAAAAAAAIAABAKAAQAAAAAAAMAABAIAAAAAAAHAAIAAAACAP//AAABAAEAAAA=")
+tile_set = SubResource("TileSet_3xtta")
+rendering_quadrant_size = 255
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D" unique_id=1994352785]
+[node name="NPC" type="CharacterBody2D" parent="." unique_id=2108567012]
+position = Vector2(36, 5)
+script = ExtResource("7_npc")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="NPC" unique_id=964550674]
+scale = Vector2(0.06675042, 0.065202706)
+sprite_frames = SubResource("SpriteFrames_op2un")
+animation = &"waving"
+
+[node name="ProximityArea" type="Area2D" parent="NPC"]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NPC/ProximityArea"]
+shape = SubResource("CircleShape2D_npc")
+
+[node name="SpeechLabel" type="Label" parent="NPC"]
+offset_left = -30.0
+offset_top = -28.0
+offset_right = 30.0
+offset_bottom = -8.0
+theme_override_font_sizes/font_size = 10
+text = "Hey!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NPC" unique_id=746262332]
+
+[node name="Player" parent="." unique_id=209033023 instance=ExtResource("4_fdedf")]
+top_level = true
+position = Vector2(123, 40)
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=1955538831]
+position = Vector2(0, 1)
+zoom = Vector2(4, 4)
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+
+[node name="PointLight2D" type="PointLight2D" parent="Player" unique_id=354383280]
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("5_rmj7e")
+
+[node name="PauseLayer" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="pause_menu" parent="PauseLayer" instance=ExtResource("8_pause")]
+visible = false
