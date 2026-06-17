@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://bdoor0one001"]
+
+[ext_resource type="Script" path="res://scripts/door.gd" id="1_door"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_door"]
+size = Vector2(30, 20)
+
+[node name="Door" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_door")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_door")
+
+[node name="PromptLabel" type="Label" parent="."]
+offset_left = -24.0
+offset_top = -24.0
+offset_right = 24.0
+offset_bottom = -10.0
+theme_override_font_sizes/font_size = 10
+text = "open"
+horizontal_alignment = 1
+vertical_alignment = 1
