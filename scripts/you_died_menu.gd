@@ -1,6 +1,6 @@
 extends Control
 
-const GAME_SCENE := "res://scenes/game.tscn"
+const GAME_STARTING_ROOM_SCENE := "res://scenes/game_starting_room.tscn"
 const STARTING_MENU_SCENE := "res://scenes/starting_menu.tscn"
 
 @onready var new_game_button: Button = $VBoxContainer/Button
@@ -23,7 +23,7 @@ func _on_new_game_pressed() -> void:
 	SaveManager.delete_save()
 	SaveManager.clear_load_on_start()
 	get_tree().paused = false
-	get_tree().change_scene_to_file(GAME_SCENE)
+	get_tree().change_scene_to_file(GAME_STARTING_ROOM_SCENE)
 
 
 func _on_main_menu_pressed() -> void:

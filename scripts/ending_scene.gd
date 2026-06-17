@@ -8,6 +8,7 @@ const RESTART_OFFSET_Y := 520.0
 
 
 func _ready() -> void:
+	GameAudio.play_music("ending", 0.8)
 	_credits_container.position.y = RESTART_OFFSET_Y
 
 

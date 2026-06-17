@@ -86,9 +86,11 @@ func _open_door() -> void:
 	if not _can_open_door():
 		return
 
+	GameAudio.play_sfx("door")
+
 	var game := get_tree().current_scene as Node2D
 	if game != null:
-		SaveManager.prepare_game_entry(game, target_spawn)
+		SaveManager.prepare_game_entry(game, target_spawn, target_scene)
 
 	SaveManager.mark_load_on_start()
 	get_tree().change_scene_to_file(target_scene)

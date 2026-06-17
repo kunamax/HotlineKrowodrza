@@ -349,6 +349,8 @@ func _update_sprite_glitch() -> void:
 func take_damage(amount):
 	HEALTH -= amount
 	hp_bar.value = HEALTH
+	_on_damage_taken(amount)
+	GameAudio.play_sfx("hit", randf_range(0.95, 1.05))
 	modulate = Color(1, 0, 0)
 	await get_tree().create_timer(0.1).timeout
 	modulate = Color(1, 1, 1)
@@ -357,7 +359,12 @@ func take_damage(amount):
 		die()
 
 
+func _on_damage_taken(_amount: int) -> void:
+	pass
+
+
 func die():
+	GameAudio.play_sfx("enemy_death")
 	var game := get_tree().current_scene as Node2D
 	if game != null and game.has_method("save_game"):
 		game.save_game()

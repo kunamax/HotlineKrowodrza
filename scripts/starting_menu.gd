@@ -9,6 +9,7 @@ const GAME_STARTING_ROOM_SCENE := "res://scenes/game_starting_room.tscn"
 
 
 func _ready() -> void:
+	GameAudio.play_music("menu", 0.4)
 	continue_button.pressed.connect(_on_continue_pressed)
 	new_game_button.pressed.connect(_on_new_game_pressed)
 	quit_button.pressed.connect(_on_quit_pressed)
@@ -23,7 +24,7 @@ func _on_continue_pressed() -> void:
 	if not SaveManager.has_save():
 		return
 	SaveManager.mark_load_on_start()
-	get_tree().change_scene_to_file(GAME_SCENE)
+	get_tree().change_scene_to_file(SaveManager.get_saved_scene_path())
 
 
 func _on_new_game_pressed() -> void:

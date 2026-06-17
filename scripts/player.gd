@@ -6,8 +6,10 @@ const MUZZLE_OFFSET = 14.0
 var MAX_HEALTH = 60
 var HEALTH = 60
 var keys := 0
+var shield_active := false
 
 signal keys_changed(key_count: int)
+signal shield_changed(active: bool)
 
 var Bullet = load("res://scenes/bullet.tscn")
 var facing_horizontal = 1
@@ -56,6 +58,7 @@ func get_input():
 		sprite.play(anim)
 
 	if Input.is_action_just_pressed("Shoot"):
+		GameAudio.play_sfx("shoot", randf_range(0.96, 1.04))
 		shoot()
 
 
@@ -92,6 +95,15 @@ func shoot():
 
 
 func take_damage(amount):
+	if shield_active:
+		shield_active = false
+		shield_changed.emit(false)
+		GameAudio.play_sfx("shield")
+		modulate = Color(0.55, 0.85, 1.0)
+		await get_tree().create_timer(0.12).timeout
+		modulate = Color(1, 1, 1)
+		return
+
 	HEALTH -= amount
 	hp_bar.value = HEALTH
 	modulate = Color(1, 0, 0)
@@ -100,6 +112,21 @@ func take_damage(amount):
 
 	if HEALTH <= 0:
 		die()
+
+
+func heal(amount: int) -> void:
+	HEALTH = mini(HEALTH + amount, MAX_HEALTH)
+	hp_bar.value = HEALTH
+
+
+func grant_shield() -> void:
+	shield_active = true
+	shield_changed.emit(true)
+
+
+func set_shield_active(active: bool) -> void:
+	shield_active = active
+	shield_changed.emit(shield_active)
 
 
 func collect_key() -> void:

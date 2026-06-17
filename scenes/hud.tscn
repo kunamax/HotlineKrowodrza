@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/hud.gd" id="1_hud"]
 [ext_resource type="Texture2D" uid="uid://cbenddagj361t" path="res://assets/key.png" id="2_key"]
+[ext_resource type="Texture2D" uid="uid://dcnc2r3w1kutt" path="res://assets/shield.png" id="3_shield"]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_hud")
@@ -30,4 +31,22 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 28
 text = "x 0"
+vertical_alignment = 1
+
+[node name="ShieldIcon" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("3_shield")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ShieldLabel" type="Label" parent="MarginContainer/HBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.9, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 22
+text = "SHIELD"
 vertical_alignment = 1

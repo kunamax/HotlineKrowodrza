@@ -9,12 +9,15 @@ var _autosave_timer: Timer
 
 func _ready() -> void:
 	_setup_autosave()
+	GameAudio.play_music("dungeon", 0.6)
 
 	if SaveManager.load_on_scene_start:
 		SaveManager.load_into_game(self)
 		SaveManager.clear_load_on_start()
 	else:
 		save_game()
+
+	_apply_save_flags()
 
 
 func _setup_autosave() -> void:
@@ -38,6 +41,15 @@ func show_death_menu() -> void:
 	if _autosave_timer != null:
 		_autosave_timer.stop()
 	_death_menu.show_menu()
+
+
+func _apply_save_flags() -> void:
+	if not SaveManager.is_boss_door_used():
+		return
+
+	var boss_door := get_node_or_null("DoorToBossRoom")
+	if boss_door != null:
+		boss_door.queue_free()
 
 
 func _notification(what: int) -> void:
