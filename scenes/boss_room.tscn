@@ -1,0 +1,49 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/player.tscn" id="1_player"]
+[ext_resource type="PackedScene" path="res://scenes/enemy_cyclops.tscn" id="2_boss"]
+[ext_resource type="PackedScene" path="res://scenes/hud.tscn" id="3_hud"]
+[ext_resource type="PackedScene" path="res://scenes/pause_menu.tscn" id="4_pause"]
+[ext_resource type="PackedScene" path="res://scenes/you_died_menu.tscn" id="5_death"]
+[ext_resource type="Script" path="res://scripts/boss_room.gd" id="6_room"]
+
+[node name="BossRoom" type="Node2D"]
+script = ExtResource("6_room")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.11, 0.11, 0.11, 1)
+
+[node name="Player" parent="." instance=ExtResource("1_player")]
+top_level = true
+position = Vector2(120, 220)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(4, 4)
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+
+[node name="Boss" parent="." instance=ExtResource("2_boss")]
+position = Vector2(430, 220)
+scale = Vector2(2.4, 2.4)
+MAX_HEALTH = 28
+HEALTH = 28
+speed = 75
+chase_speed = 90
+attack_lunge_speed = 150
+detect_range = 420
+lose_range = 600
+attack_damage = 10
+
+[node name="HUD" parent="." instance=ExtResource("3_hud")]
+
+[node name="PauseLayer" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="pause_menu" parent="PauseLayer" instance=ExtResource("4_pause")]
+visible = false
+
+[node name="DeathLayer" type="CanvasLayer" parent="."]
+layer = 11
+
+[node name="you_died_menu" parent="DeathLayer" instance=ExtResource("5_death")]
+visible = false

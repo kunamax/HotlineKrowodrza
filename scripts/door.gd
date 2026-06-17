@@ -1,10 +1,11 @@
 extends Area2D
 
-const GAME_SCENE := "res://scenes/game.tscn"
-const GAME_SPAWN := Vector2.ZERO
 const LABEL_MODULATE := Color(12.38, 12.38, 12.38, 1.0)
 
 @export var prompt_text := "open"
+@export_file("*.tscn") var target_scene := "res://scenes/game.tscn"
+@export var target_spawn := Vector2.ZERO
+@export var requires_key := true
 
 @onready var _prompt_label: Label = $PromptLabel
 
@@ -21,7 +22,7 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	if not _player_in_range or not _player_has_key():
+	if not _player_in_range or not _can_open_door():
 		return
 
 	if Input.is_action_just_pressed("Interact"):
@@ -52,11 +53,22 @@ func _on_body_exited(body: Node2D) -> void:
 
 
 func _player_has_key() -> bool:
-	return _nearby_player != null and _nearby_player.keys > 0
+	if not requires_key:
+		return true
+
+	if _nearby_player == null:
+		return false
+
+	var key_count: Variant = _nearby_player.get("keys")
+	return typeof(key_count) in [TYPE_INT, TYPE_FLOAT] and key_count > 0
+
+
+func _can_open_door() -> bool:
+	return not target_scene.is_empty() and _player_has_key()
 
 
 func _update_prompt() -> void:
-	if _player_has_key():
+	if _can_open_door():
 		_prompt_label.text = prompt_text
 		_prompt_label.show()
 	else:
@@ -71,12 +83,12 @@ func _style_prompt_label() -> void:
 
 
 func _open_door() -> void:
-	if not _player_has_key():
+	if not _can_open_door():
 		return
 
 	var game := get_tree().current_scene as Node2D
 	if game != null:
-		SaveManager.prepare_game_entry(game, GAME_SPAWN)
+		SaveManager.prepare_game_entry(game, target_spawn)
 
 	SaveManager.mark_load_on_start()
-	get_tree().change_scene_to_file(GAME_SCENE)
+	get_tree().change_scene_to_file(target_scene)

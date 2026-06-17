@@ -26233,11 +26233,18 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NPC/ProximityArea" unique_id=228316401]
 shape = SubResource("CircleShape2D_npc")
 
+[node name="SpeechBubble" type="Panel" parent="NPC" unique_id=114002781]
+offset_left = -76.0
+offset_top = -64.0
+offset_right = 76.0
+offset_bottom = -20.0
+mouse_filter = 2
+
 [node name="SpeechLabel" type="Label" parent="NPC" unique_id=931288530]
-offset_left = -30.0
-offset_top = -28.0
-offset_right = 30.0
-offset_bottom = -8.0
+offset_left = -70.0
+offset_top = -58.0
+offset_right = 70.0
+offset_bottom = -26.0
 theme_override_font_sizes/font_size = 10
 text = "Hey!"
 horizontal_alignment = 1

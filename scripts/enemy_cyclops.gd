@@ -51,7 +51,7 @@ var is_stuttering := false
 func _ready():
 	hp_bar.max_value = MAX_HEALTH
 	hp_bar.value = HEALTH
-	pathfinding = get_tree().current_scene.get_node("Pathfinding")
+	pathfinding = get_tree().current_scene.get_node_or_null("Pathfinding")
 	patrol_target = global_position + Vector2(direction * 80, 0)
 	malfunction_timer = randf_range(0.0, 1.0)
 
