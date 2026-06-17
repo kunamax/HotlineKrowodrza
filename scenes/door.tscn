@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://bdoor0one001"]
 
 [ext_resource type="Script" path="res://scripts/door.gd" id="1_door"]
+[ext_resource type="Texture2D" uid="uid://dcnc2r3w1kutt" path="res://assets/shield.png" id="2_marker"]
+[ext_resource type="Texture2D" path="res://assets/2d_lights_and_shadows_neutral_point_light.png" id="3_light"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_door"]
 size = Vector2(34, 36)
@@ -9,15 +11,29 @@ size = Vector2(34, 36)
 collision_mask = 2
 script = ExtResource("1_door")
 
+[node name="MarkerSprite" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -18)
+scale = Vector2(0.11, 0.11)
+texture = ExtResource("2_marker")
+
+[node name="GlowLight" type="PointLight2D" parent="."]
+visible = false
+position = Vector2(0, -18)
+scale = Vector2(0.8, 0.8)
+energy = 1.1
+texture = ExtResource("3_light")
+texture_scale = 0.45
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -18)
 shape = SubResource("RectangleShape2D_door")
 
 [node name="PromptLabel" type="Label" parent="."]
-offset_left = -24.0
-offset_top = -24.0
-offset_right = 24.0
-offset_bottom = -10.0
+offset_left = -48.0
+offset_top = -36.0
+offset_right = 48.0
+offset_bottom = -22.0
 theme_override_font_sizes/font_size = 10
 text = "open"
 horizontal_alignment = 1

@@ -18,10 +18,14 @@ const SFX_PATHS := {
 }
 
 const MUSIC_VOLUME_DB := 6.0
+const MUSIC_MIN_DB := -36.0
+const SFX_MIN_DB := -30.0
 
 var _music_player: AudioStreamPlayer
 var _sfx_players: Array[AudioStreamPlayer] = []
 var _current_track := ""
+var _music_linear := 0.85
+var _sfx_linear := 1.0
 
 
 func _ready() -> void:
@@ -39,6 +43,8 @@ func _ready() -> void:
 		player.bus = &"Master"
 		add_child(player)
 		_sfx_players.append(player)
+
+	_apply_sfx_volume()
 
 
 func _load_music_stream(path: String) -> AudioStream:
@@ -85,8 +91,34 @@ func play_music(track_name: String, _fade_in := 0.5) -> void:
 	_current_track = track_name
 	_music_player.stop()
 	_music_player.stream = stream
-	_music_player.volume_db = MUSIC_VOLUME_DB
+	_apply_music_volume()
 	_music_player.play()
+
+
+func set_music_volume_linear(linear: float) -> void:
+	_music_linear = clampf(linear, 0.0, 1.0)
+	_apply_music_volume()
+
+
+func set_sfx_volume_linear(linear: float) -> void:
+	_sfx_linear = clampf(linear, 0.0, 1.0)
+	_apply_sfx_volume()
+
+
+func _apply_music_volume() -> void:
+	if _music_player == null:
+		return
+	if _music_linear <= 0.001:
+		_music_player.volume_db = -80.0
+		return
+	var scaled_db := MUSIC_MIN_DB + (MUSIC_VOLUME_DB - MUSIC_MIN_DB) * _music_linear
+	_music_player.volume_db = scaled_db
+
+
+func _apply_sfx_volume() -> void:
+	var volume_db := SFX_MIN_DB + (0.0 - SFX_MIN_DB) * _sfx_linear
+	for player in _sfx_players:
+		player.volume_db = volume_db
 
 
 func stop_music(_fade_out := 0.35) -> void:

@@ -7,7 +7,6 @@ const INTRO_HOLD_TIME := 2.0
 var _autosave_timer: Timer
 var _ending_started := false
 var _intro_active := false
-var _loaded_from_save := false
 
 @onready var _death_menu: Control = $DeathLayer/you_died_menu
 @onready var _boss: Node = $Boss
@@ -19,9 +18,10 @@ var _loaded_from_save := false
 
 func _ready() -> void:
 	_setup_autosave()
-	_loaded_from_save = SaveManager.load_on_scene_start
+	var should_load_save := SaveManager.load_on_scene_start
+	var play_intro: bool = SaveManager.consume_fresh_scene_entry()
 
-	if _loaded_from_save:
+	if should_load_save:
 		SaveManager.load_into_game(self)
 		SaveManager.clear_load_on_start()
 	else:
@@ -31,7 +31,7 @@ func _ready() -> void:
 	_watch_boss_state()
 	GameAudio.stop_music(0.2)
 
-	if _loaded_from_save:
+	if should_load_save and not play_intro:
 		_skip_intro()
 		GameAudio.play_music("boss", 0.4)
 	else:
@@ -65,8 +65,12 @@ func _on_boss_health_changed(current: int, maximum: int) -> void:
 
 func _on_boss_phase_changed(_phase: int) -> void:
 	_phase_label.show()
-	await get_tree().create_timer(1.2).timeout
-	_phase_label.hide()
+	var tree := _active_tree()
+	if tree == null:
+		return
+	await tree.create_timer(1.2).timeout
+	if is_instance_valid(_phase_label):
+		_phase_label.hide()
 
 
 func _on_autosave_timeout() -> void:
@@ -93,13 +97,16 @@ func _notification(what: int) -> void:
 
 func _watch_boss_state() -> void:
 	if _boss == null:
-		_on_boss_defeated()
+		_start_ending_sequence()
 		return
 
-	_boss.tree_exited.connect(_on_boss_defeated)
+	if _boss.has_signal("defeated"):
+		_boss.defeated.connect(_start_ending_sequence, CONNECT_ONE_SHOT)
+	else:
+		_boss.tree_exited.connect(_start_ending_sequence, CONNECT_ONE_SHOT)
 
 
-func _on_boss_defeated() -> void:
+func _start_ending_sequence() -> void:
 	if _ending_started:
 		return
 
@@ -108,8 +115,21 @@ func _on_boss_defeated() -> void:
 	SaveManager.delete_save()
 	if _autosave_timer != null:
 		_autosave_timer.stop()
-	await get_tree().create_timer(0.7).timeout
-	get_tree().change_scene_to_file(ENDING_SCENE)
+
+	var tree := _active_tree()
+	if tree == null:
+		return
+
+	await tree.create_timer(0.7).timeout
+	tree = _active_tree()
+	if tree != null:
+		tree.change_scene_to_file(ENDING_SCENE)
+
+
+func _active_tree() -> SceneTree:
+	if is_inside_tree():
+		return get_tree()
+	return Engine.get_main_loop() as SceneTree
 
 
 func _skip_intro() -> void:
@@ -135,17 +155,21 @@ func _play_boss_intro() -> void:
 	var intro_label: Label = fade_layer.get_node("IntroLabel")
 
 	fade_rect.color = Color(0, 0, 0, 1)
+	fade_rect.mouse_filter = Control.MOUSE_FILTER_STOP
 	intro_label.show()
 
 	var fade_in := create_tween()
-	fade_in.tween_property(fade_rect, "color:a", 0.55, 0.9)
+	fade_in.tween_property(fade_rect, "color", Color(0, 0, 0, 0.55), 0.9)
 	await fade_in.finished
 
-	await get_tree().create_timer(INTRO_HOLD_TIME).timeout
+	var tree := _active_tree()
+	if tree == null:
+		return
+	await tree.create_timer(INTRO_HOLD_TIME).timeout
 
 	intro_label.hide()
 	var fade_out := create_tween()
-	fade_out.tween_property(fade_rect, "color:a", 0.0, 0.6)
+	fade_out.tween_property(fade_rect, "color", Color(0, 0, 0, 0), 0.6)
 	await fade_out.finished
 
 	fade_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE

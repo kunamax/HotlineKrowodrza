@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/you_died_menu.gd" id="1_death"]
 [ext_resource type="FontFile" uid="uid://ddps0wvowff7j" path="res://assets/fonts/ARCADECLASSIC.TTF" id="1_y061l"]
+[ext_resource type="PackedScene" uid="uid://bqx7optionspanel" path="res://scenes/game_options_panel.tscn" id="2_options"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r288c"]
 bg_color = Color(0, 0, 0, 0.40392157)
@@ -40,6 +41,7 @@ grow_vertical = 2
 script = ExtResource("1_death")
 
 [node name="Panel" type="Panel" parent="." unique_id=68596407]
+mouse_filter = 2
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -99,7 +101,10 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_w0imc")
 theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_33a0f")
 text = "MAIN MENU"
 
+[node name="GameOptionsPanel" parent="." instance=ExtResource("2_options")]
+
 [node name="Label" type="Label" parent="." unique_id=666285299]
+mouse_filter = 2
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5

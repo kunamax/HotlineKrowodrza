@@ -1,0 +1,131 @@
+[gd_scene format=3 uid="uid://cu5uqoenxpskt"]
+
+[ext_resource type="Script" path="res://scripts/game_options_panel.gd" id="1_options"]
+[ext_resource type="FontFile" uid="uid://ddps0wvowff7j" path="res://assets/fonts/ARCADECLASSIC.TTF" id="2_font"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kp2u6"]
+bg_color = Color(0.51, 0.90199983, 1, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6gt2g"]
+bg_color = Color(0.7, 0.93999994, 1, 1)
+border_color = Color(1, 0.7316667, 0.3, 1)
+border_blend = true
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ec4vr"]
+bg_color = Color(0.76, 0.9519999, 1, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[node name="GameOptionsPanel" type="VBoxContainer"]
+visible = false
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -360.0
+offset_top = -220.0
+offset_right = 360.0
+offset_bottom = 280.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 18
+script = ExtResource("1_options")
+
+[node name="OptionsTitle" type="Label" parent="."]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.63434, 0.8919244, 0.88754535, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 72
+text = "OPTIONS"
+horizontal_alignment = 1
+
+[node name="MusicRow" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="MusicLabel" type="Label" parent="MusicRow"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 36
+text = "MUSIC"
+vertical_alignment = 1
+
+[node name="MusicSlider" type="HSlider" parent="MusicRow"]
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 100.0
+step = 1.0
+value = 85.0
+
+[node name="MusicValue" type="Label" parent="MusicRow"]
+custom_minimum_size = Vector2(72, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 32
+text = "85%"
+vertical_alignment = 1
+
+[node name="SfxRow" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="SfxLabel" type="Label" parent="SfxRow"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 36
+text = "SFX"
+vertical_alignment = 1
+
+[node name="SfxSlider" type="HSlider" parent="SfxRow"]
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 100.0
+step = 1.0
+value = 100.0
+
+[node name="SfxValue" type="Label" parent="SfxRow"]
+custom_minimum_size = Vector2(72, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 32
+text = "100%"
+vertical_alignment = 1
+
+[node name="ShakeCheck" type="CheckButton" parent="."]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 36
+button_pressed = true
+text = "SCREEN SHAKE"
+
+[node name="FullscreenCheck" type="CheckButton" parent="."]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 36
+text = "FULLSCREEN"
+
+[node name="BackButton" type="Button" parent="."]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.14819999, 0.18360335, 0.26, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxFlat_kp2u6")
+theme_override_styles/hover = SubResource("StyleBoxFlat_6gt2g")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_ec4vr")
+text = "BACK"

@@ -6,11 +6,15 @@ const LABEL_MODULATE := Color(12.38, 12.38, 12.38, 1.0)
 @export_file("*.tscn") var target_scene := "res://scenes/game.tscn"
 @export var target_spawn := Vector2.ZERO
 @export var requires_key := true
+@export var is_boss_entrance := false
 
 @onready var _prompt_label: Label = $PromptLabel
+@onready var _marker_sprite: Sprite2D = $MarkerSprite
+@onready var _glow_light: PointLight2D = $GlowLight
 
 var _player_in_range := false
 var _nearby_player: Node2D = null
+var _pulse_tween: Tween = null
 
 
 func _ready() -> void:
@@ -19,6 +23,32 @@ func _ready() -> void:
 	_prompt_label.hide()
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
+	_setup_entrance_visual()
+
+
+func _setup_entrance_visual() -> void:
+	if not is_boss_entrance:
+		if _marker_sprite != null:
+			_marker_sprite.hide()
+		if _glow_light != null:
+			_glow_light.hide()
+		return
+
+	if _marker_sprite != null:
+		_marker_sprite.show()
+		_marker_sprite.modulate = Color(1.0, 0.55, 0.2, 1.0)
+	if _glow_light != null:
+		_glow_light.show()
+		_glow_light.color = Color(1.0, 0.45, 0.15)
+	_start_boss_pulse()
+
+
+func _start_boss_pulse() -> void:
+	if _marker_sprite == null:
+		return
+	_pulse_tween = create_tween().set_loops()
+	_pulse_tween.tween_property(_marker_sprite, "scale", Vector2(0.13, 0.13), 0.75)
+	_pulse_tween.tween_property(_marker_sprite, "scale", Vector2(0.1, 0.1), 0.75)
 
 
 func _process(_delta: float) -> void:
@@ -93,4 +123,9 @@ func _open_door() -> void:
 		SaveManager.prepare_game_entry(game, target_spawn, target_scene)
 
 	SaveManager.mark_load_on_start()
+	SaveManager.mark_fresh_scene_entry()
 	get_tree().change_scene_to_file(target_scene)
+
+
+func get_objective_position() -> Vector2:
+	return global_position

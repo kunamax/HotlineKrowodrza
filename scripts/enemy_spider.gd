@@ -57,6 +57,7 @@ var is_stuttering := false
 @onready var muzzle = $Muzzle
 
 func _ready():
+	add_to_group("enemy")
 	hp_bar.max_value = MAX_HEALTH
 	hp_bar.value = HEALTH
 	pathfinding = get_tree().current_scene.get_node("Pathfinding")
@@ -385,6 +386,7 @@ func take_damage(amount):
 	HEALTH -= amount
 	hp_bar.value = HEALTH
 	GameAudio.play_sfx("hit", randf_range(0.95, 1.05))
+	CombatFeel.on_enemy_hit()
 	modulate = Color(1, 0, 0)
 	await get_tree().create_timer(0.1).timeout
 	modulate = Color(1, 1, 1)
@@ -395,6 +397,7 @@ func take_damage(amount):
 
 func die():
 	GameAudio.play_sfx("enemy_death")
+	CombatFeel.on_enemy_killed()
 	var game := get_tree().current_scene as Node2D
 	if game != null and game.has_method("save_game"):
 		game.save_game()

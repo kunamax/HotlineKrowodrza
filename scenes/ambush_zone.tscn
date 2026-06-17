@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://cambush0n0001"]
+
+[ext_resource type="Script" path="res://scripts/ambush_zone.gd" id="1_ambush"]
+[ext_resource type="PackedScene" uid="uid://boqrlsbmw6eac" path="res://scenes/enemy_spider.tscn" id="2_spider"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_zone"]
+size = Vector2(120, 100)
+
+[node name="AmbushZone" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_ambush")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 10)
+shape = SubResource("RectangleShape2D_zone")
+
+[node name="WarningLabel" type="Label" parent="."]
+offset_left = -8.0
+offset_top = -28.0
+offset_right = 8.0
+offset_bottom = -12.0
+theme_override_colors/font_color = Color(1, 0.35, 0.35, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 16
+text = "!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Enemy_Ambush1" parent="." instance=ExtResource("2_spider")]
+position = Vector2(-28, 18)
+scale = Vector2(0.54, 0.54)
+
+[node name="Enemy_Ambush2" parent="." instance=ExtResource("2_spider")]
+position = Vector2(34, 28)
+scale = Vector2(0.54, 0.54)

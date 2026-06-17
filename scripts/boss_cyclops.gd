@@ -2,6 +2,7 @@ extends "res://scripts/enemy_cyclops.gd"
 
 signal phase_changed(phase: int)
 signal health_changed(current: int, maximum: int)
+signal defeated
 
 enum Phase { ONE, TWO }
 
@@ -124,3 +125,8 @@ func _update_telegraph_line() -> void:
 	if player == null or _telegraph_line == null:
 		return
 	_telegraph_line.points = [Vector2.ZERO, to_local(player.global_position)]
+
+
+func die() -> void:
+	defeated.emit()
+	super.die()

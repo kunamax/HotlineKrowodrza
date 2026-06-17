@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://ckeygate00001"]
+
+[ext_resource type="Script" path="res://scripts/key_gate.gd" id="1_gate"]
+[ext_resource type="Texture2D" uid="uid://bramm0eqpnwyh" path="res://assets/lock.png" id="2_lock"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_block"]
+size = Vector2(20, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lock"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_lock")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_interact"]
+size = Vector2(36, 56)
+
+[node name="KeyGate" type="StaticBody2D"]
+collision_layer = 1
+script = ExtResource("1_gate")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_block")
+
+[node name="LockSprite" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.12, 0.12)
+sprite_frames = SubResource("SpriteFrames_lock")
+
+[node name="PromptLabel" type="Label" parent="."]
+offset_left = -28.0
+offset_top = -34.0
+offset_right = 28.0
+offset_bottom = -18.0
+theme_override_font_sizes/font_size = 9
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InteractArea" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea"]
+shape = SubResource("RectangleShape2D_interact")

@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://cgrenade00001"]
+
+[ext_resource type="Script" path="res://scripts/grenade.gd" id="1_grenade"]
+[ext_resource type="Texture2D" uid="uid://68i4rnkywu81" path="res://assets/bullet.png" id="2_tex"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_grenade"]
+radius = 4.0
+
+[node name="Grenade" type="Area2D" groups=["grenade"]]
+collision_layer = 8
+collision_mask = 5
+script = ExtResource("1_grenade")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0.55, 0.15, 1)
+scale = Vector2(0.09, 0.09)
+texture = ExtResource("2_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_grenade")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

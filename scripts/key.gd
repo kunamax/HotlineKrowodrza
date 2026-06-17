@@ -1,6 +1,10 @@
 extends Area2D
 
 
+func get_objective_position() -> Vector2:
+	return global_position
+
+
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
 
