@@ -93,13 +93,24 @@ func _show_current_line() -> void:
 	_layout_speech("%s\n[F] Next" % DIALOG_LINES[_dialog_index])
 
 
+func _measure_text_height(text: String) -> float:
+	var font := _speech_label.get_theme_font("font")
+	var font_size := _speech_label.get_theme_font_size("font_size")
+	return font.get_multiline_string_size(
+		text,
+		_speech_label.horizontal_alignment,
+		BUBBLE_WIDTH,
+		font_size
+	).y
+
+
 func _layout_speech(text: String) -> void:
 	_speech_label.text = text
-	_speech_label.custom_minimum_size = Vector2(BUBBLE_WIDTH, 0)
 
-	await get_tree().process_frame
-
-	var content_height: float = _speech_label.get_content_height()
+	var content_height: float = maxf(
+		_measure_text_height(text),
+		float(_speech_label.get_line_height())
+	)
 	var bubble_height: float = content_height + BUBBLE_PADDING * 2.0
 	var half_width: float = BUBBLE_WIDTH * 0.5 + BUBBLE_PADDING
 

@@ -1,6 +1,6 @@
 # HOTLINE KROWODRZA
 
-**Autorzy:** Jakub Sadkiewicz, Ola Fafara, Szymon Ciosek
+**Autorzy:** Jakub Sadkiewicz, Aleksandra Fafara, Szymon Ciosek
 
 ---
 
@@ -10,19 +10,19 @@
 
 ### Koncepcja
 
-Gra łączy eksplorację zamkniętego labiryntu korytarzy z dynamiczną walką dystansową. Fabuła startuje w pokoju początkowym, gdzie NPC wyjaśnia sytuację: rdzeniowa SI przeszła w tryb wrogi, załoga została zdziesiątkowana, a jedyną szansą na uratowanie statku jest dotarcie do rdzenia nawigacyjnego strzeżonego przez bossa — Cyclopsa. Gracz musi zdobyć klucz, otworzyć drzwi do głównego pokładu, przejść przez sekcje statku pełne wrogów i dotrzeć do sali bossa.
+Gra łączy eksplorację zamkniętego labiryntu korytarzy z dynamiczną walką dystansową. Fabuła startuje w pokoju początkowym, gdzie NPC wyjaśnia sytuację: AI przeszła w tryb wrogi, załoga została zdziesiątkowana, a jedyną szansą na uratowanie statku jest dotarcie do rdzenia nawigacyjnego strzeżonego przez bossa - Cyclopsa. Gracz musi zdobyć klucz, otworzyć drzwi do głównego pokładu, przejść przez sekcje statku pełne wrogów i dotrzeć do sali bossa.
 
 ### Inspiracje
 
 Bezpośrednie:
-- **Hotline Miami** — szybka, bezpośrednia akcja, widok z góry, retro klimat i brutalna dynamika starć
-- **The Binding of Isaac** / klasyczne dungeon crawl'e — eksploracja pokładu, zbieranie wzmocnień, progresja przez klucz i bossa
-- **Enter the Gungeon** — strzelanie w kierunku kursora myszy, unikanie pocisków, granaty obszarowe
+- **Hotline Miami** - szybka, bezpośrednia akcja, widok z góry, retro klimat i brutalna dynamika starć
+- **The Binding of Isaac** / klasyczne dungeon crawl'e - eksploracja pokładu, zbieranie wzmocnień, progresja przez klucz i bossa
+- **Enter the Gungeon** - strzelanie w kierunku kursora myszy, unikanie pocisków, granaty obszarowe
 
 ### Co wyróżnia tę wersję
 
-- **Świat statku kosmicznego** zamiast miejskiego labiryntu — korytarze, migoczące światła, atmosfera pokładu
-- **Wrogowie z „awarią"** — jednostki ochrony poruszają się z losowymi zacięciami, drganiami i błędami toru, co wizualnie uzasadnia fabułę zbuntowanej SI
+- **Świat statku kosmicznego** zamiast miejskiego labiryntu - korytarze, migoczące światła, atmosfera pokładu
+- **Wrogowie z „awarią"** - jednostki ochrony poruszają się z losowymi zacięciami, drganiami i błędami toru, co wizualnie uzasadnia fabułę zbuntowanej AI
 - **Boss dwufazowy (Cyclops)** z telegraphiem ataku (linia ostrzegawcza przed szarżą)
 - **Strefy zasadzki (ambush zones)** aktywujące ukrytych wrogów po wejściu gracza w obszar
 
@@ -46,18 +46,17 @@ Gra uruchamiana jest na komputerze PC z systemem Windows. Projekt można otworzy
 ### Świat gry
 
 - **Widok:** 2D, top-down
-- **Zasięg:** ograniczony — pokład statku zbudowany z kafelków (`TileMapLayer`), podzielony na sceny:
-  - `game_starting_room` — pokój startowy z NPC, kluczem i drzwiami
-  - `game` — główny pokład statku (dungeon)
-  - `boss_room` — arena bossa
+- **Zasięg:** ograniczony - pokład statku zbudowany z kafelków (`TileMapLayer`), podzielony na sceny:
+  - `game_starting_room` - pokój startowy z NPC, kluczem i drzwiami
+  - `game` - główny pokład statku (dungeon)
+  - `boss_room` - arena bossa
 - Tło: animowane gwiazdy + warstwy kafelków podłogi i ścian
 - Oświetlenie: dynamiczne `PointLight2D` z migotaniem w wybranych miejscach (`ship_ambience`)
 
 ### Kamera
 
 - Kamera (`Camera2D`) jest przypisana do gracza
-- Zoom: **4×** — powiększenie podkreślające pixel-artową estetykę
-- Wygładzanie pozycji (`position_smoothing`) — kamera podąża za graczem płynnie
+- Wygładzanie pozycji (`position_smoothing`) - kamera podąża za graczem płynnie
 - Efekty walki: shake kamery i błysk ekranu przy trafieniach (`CombatFeel`)
 
 ### Postać gracza
@@ -68,58 +67,58 @@ Gra uruchamiana jest na komputerze PC z systemem Windows. Projekt można otworzy
 | Prędkość | 85 px/s |
 | Broń | strzał w kierunku kursora myszy (LPM / Spacja) |
 | Granaty | 3 szt., cooldown 2,6 s, zasięg wybuchu ~52 px, obrażenia 3 |
-| Tarcza | jednorazowa — blokuje pierwsze trafienie po podniesieniu |
+| Tarcza | jednorazowa - blokuje pierwsze trafienie po podniesieniu |
 | Klucze | wymagane do otwierania drzwi i bram |
 
 Sterowanie:
-- **WASD** — ruch
-- **LPM / Spacja** — strzał (kierunek: mysz)
-- **G** — granat
-- **F** — interakcja (dialogi, klucz, drzwi, tablice)
-- **ESC** — pauza
+- **WASD** - ruch
+- **LPM / Spacja** - strzał (kierunek: mysz)
+- **G** - granat
+- **F** - interakcja (dialogi, klucz, drzwi, tablice)
+- **ESC** - pauza
 
 ### NPC i dialogi
 
-- W pokoju startowym znajduje się **NPC**, który po podejściu gracza uruchamia wieloliniowy dialog o zbuntowanej SI i misji ratunku
+- W pokoju startowym znajduje się **NPC**, który po podejściu gracza uruchamia wieloliniowy dialog o zbuntowanej AI i misji ratunku
 - Dialogi obsługiwane są przez dymki z przyciskiem **[F] Next**
 - Tablice lore (`lore_sign`) w dungeonie dostarczają dodatkowego kontekstu świata
 
 ### System walki
 
 **Gracz:**
-- Pociski (`bullet.tscn`) — natychmiastowy strzał w kierunku celownika
-- Granaty — rzut z opóźnionym wybuchem, obrażenia obszarowe na wrogów
+- Pociski (`bullet.tscn`) - natychmiastowy strzał w kierunku celownika
+- Granaty - rzut z opóźnionym wybuchem, obrażenia obszarowe na wrogów
 - Tarcza pochłania jedno trafienie bez utraty HP
 
-**Wrogowie — Spider (pająk):**
+**Wrogowie - Spider (pająk):**
 - HP: 5
 - Maszyna stanów: **PATROL → CHASE → ATTACK**
 - Strzelają do gracza z dystansu (zasięg ~220 px)
 - W trybie ataku wykonują szarżę z wind-up, lungą i odrzutem
-- „Awaria" — losowe zacięcia ruchu, zmiany prędkości i rotacji sprite'a
+- „Awaria" - losowe zacięcia ruchu, zmiany prędkości i rotacji sprite'a
 
-**Wrogowie — Cyclops:**
+**Wrogowie - Cyclops:**
 - HP: 5 (zwykły) / boss: rozszerzona wersja z fazami
 - Większe obrażenia w zwarciu (2 pkt)
-- Boss Cyclops: **faza II** po spadku HP poniżej 50% — szybsze ataki, większy zasięg wykrywania, telegraph linii przed szarżą
+- Boss Cyclops: **faza II** po spadku HP poniżej 50% - szybsze ataki, większy zasięg wykrywania, telegraph linii przed szarżą
 
 **Pathfinding wrogów:**
 - Wrogowie korzystają z `AStarGrid2D` (`map_pathfinding.gd`) do nawigacji po pokładzie statku
 - Siatka budowana dynamicznie wokół pozycji gracza i celu
 
 **Spawning:**
-- `EnemySpawner` — 24 pająki + 3 cyclopsy rozmieszczone w predefiniowanych punktach
+- `EnemySpawner` - 24 pająki + 3 cyclopsy rozmieszczone w predefiniowanych punktach
 - Wrogowie aktywują się, gdy gracz zbliży się na określoną odległość
 - Strefy zasadzki (`ambush_zone`) uwalniają ukrytych wrogów po wejściu gracza
 
 ### Zadania i progresja
 
-Gra nie posiada klasycznego quest loga — progresja jest liniowa z elementami eksploracji:
+Gra nie posiada klasycznego quest loga - progresja jest liniowa z elementami eksploracji:
 
 1. Rozmowa z NPC w pokoju startowym
 2. Podniesienie klucza z platformy (**[F] take key**)
 3. Otwarcie drzwi do głównego pokładu (**[F] open**)
-4. Znalezienie klucza w dungeonie (wskazówka: minimapa + strzałka celu)
+4. Znalezienie klucza w dungeonie (wskazówka: strzałka celu na krawędzi ekranu)
 5. Opcjonalnie: zebranie serc (+15 HP) i tarcz
 6. Opcjonalnie: otwarcie bramy wschodniej (`key_gate`) drugim kluczem
 7. Wejście do boss roomu i pokonanie Cyclopsa
@@ -127,18 +126,16 @@ Gra nie posiada klasycznego quest loga — progresja jest liniowa z elementami e
 
 ### Sugestie taktyczne
 
-- **Zachowuj dystans** — pająki strzelają i szarżują; cyclopsy zadają więcej obrażeń w zwarciu
+- **Zachowuj dystans** - pająki strzelają i szarżują; cyclopsy zadają więcej obrażeń w zwarciu
 - **Używaj granatów** w zasadzkach i przy grupach wrogów
-- **Zbieraj tarcze** przed trudniejszymi sekcjami — jednorazowa ochrona może uratować życie
-- **Obserwuj telegraph bossa** — czerwona linia sygnalizuje nadchodzącą szarżę w fazie II
-- **Korzystaj z minimapy** — pokazuje pozycję gracza, klucza i drzwi do bossa
+- **Zbieraj tarcze** przed trudniejszymi sekcjami - jednorazowa ochrona może uratować życie
+- **Obserwuj telegraph bossa** - czerwona linia sygnalizuje nadchodzącą szarżę w fazie II
 - Przy drzwiach bez klucza gra informuje: *„You need the key"*
 
 ### Interfejs użytkownika (HUD)
 
 - Pasek zdrowia gracza (HP / max)
 - Licznik kluczy, granatów, ikona tarczy
-- Minimapa pokładu (tylko w dungeonie)
 - Strzałka celu na krawędzi ekranu + tekst (*FIND KEY* / *BOSS ROOM*)
 - Panel tutorialowy po wejściu do dungeonu (sterowanie)
 - Pasek HP bossa i etykieta fazy w boss roomie
@@ -159,9 +156,9 @@ Gra nie posiada klasycznego quest loga — progresja jest liniowa z elementami e
 
 | Asset | Pochodzenie | Uwagi |
 |-------|-------------|-------|
-| Postać gracza (`assets/pc/`) | Wygenerowany przez AI, przetworzony | Animacje idle/chód w 4 kierunkach; źródło: GIF wygenerowany przez AI, konwersja przez ezgif.com |
-| Wrogowie — Spider (`assets/enemy_1/`) | Importowane / przygotowane ręcznie | Animacje sprite'ów |
-| Wrogowie — Cyclops (`assets/enemy_2/`) | Importowane / przygotowane ręcznie | 3 klatki animacji |
+| Postać gracza (`assets/pc/`) | Wygenerowany przez AI, przetworzony ręcznie | Animacje idle/chód w 4 kierunkach |
+| Wrogowie - Spider (`assets/enemy_1/`) | Importowane / przygotowane ręcznie | Animacje sprite'ów |
+| Wrogowie - Cyclops (`assets/enemy_2/`) | Importowane / przygotowane ręcznie | 3 klatki animacji |
 | NPC (`assets/npc/`) | Importowane | 3 warianty postaci |
 | Kafelki pokładu (`assets/bg/assets.png`, `assets-gray.png`) | Importowane, modyfikowane | Tileset statku; część kafelków przycinana skryptem `prune_tileset_atlas.py` |
 | Tło gwiazd (`background_star.png`) | Importowane | Tło scen |
@@ -175,31 +172,21 @@ Gra nie posiada klasycznego quest loga — progresja jest liniowa z elementami e
 
 | Asset | Pochodzenie | Uwagi |
 |-------|-------------|-------|
-| Muzyka (menu, dungeon, boss, ending) | **Wygenerowana proceduralnie** | Skrypt `tools/generate_audio.py` — synteza fal sinusoidalnych i szumu |
+| Muzyka (menu, dungeon, boss, ending) | **Wygenerowana proceduralnie** | Skrypt `tools/generate_audio.py` - synteza fal sinusoidalnych i szumu |
 | Efekty dźwiękowe (strzał, trafienie, śmierć, drzwi, pickup, tarcza, boss roar) | **Wygenerowane proceduralnie** | Ten sam skrypt Python |
 
-### Kod i dane
-
-| Element | Pochodzenie |
-|---------|-------------|
-| Skrypty GDScript | Napisane ręcznie przez zespół |
-| Dane kafelków boss room | Wygenerowane skryptem `tools/generate_boss_room_tiles.py` |
-| Fizyka ścian / okluzja światła | Skrypty Python (`add_wall_physics.py`, `add_light_occlusion.py`) |
-
----
+--
 
 ## 5. Wykorzystanie AI
 
 | Obszar | Sposób wykorzystania | Narzędzia |
 |--------|---------------------|-----------|
 | **Grafika postaci gracza** | Generacja sprite'a żołnierza sci-fi w pixel arcie, konwersja GIF → arkusz klatek | Narzędzie generatywne AI (grafika), ezgif.com (konwersja) |
-| **Dialogi / fabuła** | Teksty NPC i lore — przygotowane z pomocą AI asystenta kodowania | Cursor AI (asystent) |
+| **Dialogi / fabuła** | Teksty NPC i lore - przygotowane z pomocą AI asystenta kodowania | Cursor AI (asystent) |
 | **Kod gry** | Część skryptów i mechanik rozwijana iteracyjnie z asystentem AI | Cursor AI |
-| **Audio** | Proceduralna synteza — **nie** generatywne AI | Python (`generate_audio.py`) |
-| **Zachowanie wrogów** | **Nie** oparte na ML — klasyczna maszyna stanów (PATROL/CHASE/ATTACK) + A* pathfinding | GDScript, `AStarGrid2D` |
-| **Boss** | Maszyna stanów z fazami + telegraph — bez uczenia maszynowego | GDScript |
+| **Audio** | Proceduralna synteza - **nie** generatywne AI | Python (`generate_audio.py`) |
 
-AI **nie** było używane do: generacji całego świata, muzyki (poza proceduralną syntezą), pełnej grafiki tilesetu ani modeli uczących się zachowania postaci.
+AI **nie** było używane do: generacji całego świata i kodu, muzyki (poza proceduralną syntezą), pełnej grafiki tilesetu ani modeli uczących się zachowania postaci.
 
 ---
 
@@ -237,45 +224,26 @@ python tools/generate_audio.py
 
 > **Uwaga:** W repozytorium nie dołączono gotowego pliku `.exe`. Aby spełnić wymaganie modułu wykonywalnego, należy wyeksportować grę z Godot i dołączyć folder `build/` do oddania.
 
-### Krótka instrukcja dla gracza
-
-1. Uruchom grę → menu główne
-2. **New Game** — nowa gra od pokoju startowego; **Continue** — kontynuacja zapisu
-3. Rozmawiaj z NPC (**F**), podnieś klucz, otwórz drzwi
-4. Eksploruj pokład, zbieraj wzmocnienia, pokonuj wrogów
-5. Znajdź klucz do boss roomu i pokonaj Cyclopsa
-6. Po zakończeniu — **F** lub LPM wraca do menu
-
 ---
 
 ## 7. Zrzuty ekranu
 
-Zrzuty ekranu należy wykonać podczas rozgrywki i umieścić w folderze `docs/screenshots/`. Poniżej sugerowane ujęcia:
-
 | Plik | Opis |
 |------|------|
-| `docs/screenshots/01_menu.png` | Menu główne |
-| `docs/screenshots/02_starting_room.png` | Pokój startowy z NPC i dialogiem |
-| `docs/screenshots/03_dungeon_combat.png` | Walka na pokładzie statku |
-| `docs/screenshots/04_boss_fight.png` | Walka z bossem Cyclopsem |
-| `docs/screenshots/05_hud_minimap.png` | HUD z minimapą i strzałką celu |
-
-Przykład osadzenia w dokumencie:
-
-```markdown
-![Menu główne](docs/screenshots/01_menu.png)
-![Walka z bossem](docs/screenshots/04_boss_fight.png)
-```
+| ![image](./docs/screenshots/01_menu.png) | Menu główne |
+| ![image](docs/screenshots/02_starting_room.png) | Pokój startowy z NPC i dialogiem |
+| ![image](docs/screenshots/03_dungeon_combat.png) | Walka na pokładzie statku |
+| ![image](docs/screenshots/04_boss_rooms.png) | Walka z bossem Cyclopsem |
 
 ---
 
 ## 8. Bibliografia
 
-- [Godot Engine 4 — dokumentacja](https://docs.godotengine.org/en/stable/) — silnik, `AStarGrid2D`, `TileMapLayer`, `CharacterBody2D`
-- [Godot — AStarGrid2D](https://docs.godotengine.org/en/stable/classes/class_astargrid2d.html) — pathfinding wrogów po siatce kafelków
-- [ARCADECLASSIC.TTF](https://www.dafont.com/) — czcionka retro (font arcade)
+- [Godot Engine 4 - dokumentacja](https://docs.godotengine.org/en/stable/) - silnik, `AStarGrid2D`, `TileMapLayer`, `CharacterBody2D`
+- [Godot - AStarGrid2D](https://docs.godotengine.org/en/stable/classes/class_astargrid2d.html) - pathfinding wrogów po siatce kafelków
+- [ARCADECLASSIC.TTF](https://www.dafont.com/) - czcionka retro (font arcade)
 - Inspiracja gameplay: *Hotline Miami* (Dennaton Games, 2012)
-- Pakiet oświetlenia 2D: tekstura `2d_lights_and_shadows_neutral_point_light` — popularny darmowy asset w społeczności Godot
+- Pakiet oświetlenia 2D: tekstura `2d_lights_and_shadows_neutral_point_light` - popularny darmowy asset w społeczności Godot
 
 ---
 

@@ -85,7 +85,7 @@ func show_death_menu() -> void:
 
 
 func _apply_save_flags() -> void:
-	if SaveManager.is_boss_door_used():
+	if SaveManager.is_boss_door_consumed():
 		var boss_door := get_node_or_null("DoorToBossRoom")
 		if boss_door != null:
 			boss_door.queue_free()

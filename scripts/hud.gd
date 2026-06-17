@@ -77,7 +77,7 @@ func _is_dungeon_scene() -> bool:
 
 
 func _update_dungeon_widgets() -> void:
-	minimap_panel.visible = _is_dungeon_scene() and not SaveManager.is_boss_door_used()
+	minimap_panel.visible = _is_dungeon_scene() and not SaveManager.is_boss_door_consumed()
 
 
 func _find_boss_target() -> Node2D:
@@ -152,7 +152,7 @@ func _update_objective_arrow() -> void:
 func _should_show_objective() -> bool:
 	if _player == null:
 		return false
-	if SaveManager.is_boss_door_used():
+	if SaveManager.is_boss_door_consumed():
 		return false
 	if not _is_dungeon_scene():
 		return false

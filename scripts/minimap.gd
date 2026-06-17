@@ -66,7 +66,7 @@ func _draw() -> void:
 	else:
 		var boss_door := game.get_node_or_null("DoorToBossRoom") as Node2D
 		if boss_door != null and is_instance_valid(boss_door) \
-				and not SaveManager.is_boss_door_used():
+				and not SaveManager.is_boss_door_consumed():
 			_draw_marker(_world_to_minimap(boss_door.global_position), BOSS_COLOR, MARKER_RADIUS)
 
 

@@ -57,6 +57,30 @@ func is_boss_door_used() -> bool:
 	return flags.get("boss_door_used", false)
 
 
+func is_boss_door_consumed() -> bool:
+	return is_boss_door_used() and get_saved_scene_path().contains("boss_room")
+
+
+func mark_boss_door_used() -> void:
+	var data := _read_save()
+	if data.is_empty():
+		data = {
+			"version": 2,
+			"scene": "res://scenes/boss_room.tscn",
+			"player": {},
+			"enemies": [],
+			"spawns": [],
+			"keys": [],
+			"pickups": [],
+			"flags": {},
+		}
+
+	var flags: Dictionary = data.get("flags", {}).duplicate()
+	flags["boss_door_used"] = true
+	data["flags"] = flags
+	_write_save(data)
+
+
 func is_east_gate_open() -> bool:
 	var flags: Dictionary = _read_save().get("flags", {})
 	return flags.get("east_gate_open", false)
@@ -91,9 +115,6 @@ func prepare_game_entry(
 	var entering_dungeon := scene_path.contains("game.tscn")
 	var from_starting_room := from_scene.contains("game_starting_room")
 	var flags: Dictionary = _read_save().get("flags", {}).duplicate()
-	if scene_path.contains("boss_room"):
-		flags["boss_door_used"] = true
-
 	var spawns: Array = []
 	var spawner := game.get_node_or_null("EnemySpawner")
 	if spawner != null and spawner.has_method("capture_state"):

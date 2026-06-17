@@ -27,6 +27,8 @@ func _ready() -> void:
 	else:
 		save_game()
 
+	SaveManager.mark_boss_door_used()
+
 	_setup_boss_hud()
 	_watch_boss_state()
 	GameAudio.stop_music(0.2)
