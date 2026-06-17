@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://0p5u2wygkbsg" path="res://scenes/key_platform.tscn" id="9_key_platform"]
 [ext_resource type="PackedScene" uid="uid://dep828jn5k2t5" path="res://scenes/hud.tscn" id="10_hud"]
 [ext_resource type="PackedScene" uid="uid://bdoor0one001" path="res://scenes/door.tscn" id="11_door"]
+[ext_resource type="Script" path="res://scripts/starting_room.gd" id="12_start"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3nihm"]
 texture = ExtResource("6_uiebh")
@@ -26199,6 +26200,7 @@ radius = 35.0
 size = Vector2(12, 14)
 
 [node name="Node2D" type="Node2D" unique_id=792395120]
+script = ExtResource("12_start")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=2025055650]
 color = Color(0.080783345, 0.080783345, 0.080783345, 1)
