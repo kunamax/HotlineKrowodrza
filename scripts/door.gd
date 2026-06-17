@@ -2,6 +2,7 @@ extends Area2D
 
 const GAME_SCENE := "res://scenes/game.tscn"
 const GAME_SPAWN := Vector2.ZERO
+const LABEL_MODULATE := Color(12.38, 12.38, 12.38, 1.0)
 
 @export var prompt_text := "open"
 
@@ -12,6 +13,7 @@ var _nearby_player: Node2D = null
 
 
 func _ready() -> void:
+	_style_prompt_label()
 	_prompt_label.text = prompt_text
 	_prompt_label.hide()
 	body_entered.connect(_on_body_entered)
@@ -59,6 +61,13 @@ func _update_prompt() -> void:
 		_prompt_label.show()
 	else:
 		_prompt_label.hide()
+
+
+func _style_prompt_label() -> void:
+	_prompt_label.modulate = LABEL_MODULATE
+	_prompt_label.add_theme_color_override("font_color", Color.WHITE)
+	_prompt_label.add_theme_color_override("font_outline_color", Color.BLACK)
+	_prompt_label.add_theme_constant_override("outline_size", 2)
 
 
 func _open_door() -> void:

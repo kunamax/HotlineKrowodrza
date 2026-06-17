@@ -1,5 +1,7 @@
 extends StaticBody2D
 
+const LABEL_MODULATE := Color(12.38, 12.38, 12.38, 1.0)
+
 @export var texture_with_key: Texture2D
 @export var texture_no_key: Texture2D
 
@@ -14,6 +16,10 @@ var _nearby_player: Node2D = null
 
 func _ready() -> void:
 	_sprite.texture = texture_with_key
+	_prompt_label.modulate = LABEL_MODULATE
+	_prompt_label.add_theme_color_override("font_color", Color.WHITE)
+	_prompt_label.add_theme_color_override("font_outline_color", Color.BLACK)
+	_prompt_label.add_theme_constant_override("outline_size", 2)
 	_prompt_label.hide()
 	_proximity_area.body_entered.connect(_on_body_entered)
 	_proximity_area.body_exited.connect(_on_body_exited)

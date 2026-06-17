@@ -3,8 +3,8 @@ extends CharacterBody2D
 const SPEED = 85.0
 const MUZZLE_OFFSET = 14.0
 
-var MAX_HEALTH = 6
-var HEALTH = 6
+var MAX_HEALTH = 60
+var HEALTH = 60
 var keys := 0
 
 signal keys_changed(key_count: int)
