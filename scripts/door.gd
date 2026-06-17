@@ -15,6 +15,7 @@ const LABEL_MODULATE := Color(12.38, 12.38, 12.38, 1.0)
 var _player_in_range := false
 var _nearby_player: Node2D = null
 var _pulse_tween: Tween = null
+var _locked_feedback_time := 0.0
 
 
 func _ready() -> void:
@@ -51,12 +52,20 @@ func _start_boss_pulse() -> void:
 	_pulse_tween.tween_property(_marker_sprite, "scale", Vector2(0.1, 0.1), 0.75)
 
 
-func _process(_delta: float) -> void:
-	if not _player_in_range or not _can_open_door():
+func _process(delta: float) -> void:
+	if _locked_feedback_time > 0.0:
+		_locked_feedback_time = maxf(_locked_feedback_time - delta, 0.0)
+		if _locked_feedback_time <= 0.0 and _player_in_range:
+			_update_prompt()
+
+	if not _player_in_range:
 		return
 
 	if Input.is_action_just_pressed("Interact"):
-		_open_door()
+		if _can_open_door():
+			_open_door()
+		elif requires_key and not _player_has_key():
+			_show_locked_feedback()
 
 
 func _on_body_entered(body: Node2D) -> void:
@@ -98,11 +107,21 @@ func _can_open_door() -> bool:
 
 
 func _update_prompt() -> void:
-	if _can_open_door():
-		_prompt_label.text = prompt_text
-		_prompt_label.show()
-	else:
+	if not _player_in_range:
 		_prompt_label.hide()
+		return
+
+	if _locked_feedback_time > 0.0:
+		return
+
+	_prompt_label.text = "[F] %s" % prompt_text
+	_prompt_label.show()
+
+
+func _show_locked_feedback() -> void:
+	_prompt_label.text = "You need the key"
+	_prompt_label.show()
+	_locked_feedback_time = 2.0
 
 
 func _style_prompt_label() -> void:

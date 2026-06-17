@@ -1,6 +1,7 @@
 extends StaticBody2D
 
 const LABEL_MODULATE := Color(12.38, 12.38, 12.38, 1.0)
+const PROMPT_TEXT := "[F] take key"
 
 @export var texture_with_key: Texture2D
 @export var texture_no_key: Texture2D
@@ -39,6 +40,7 @@ func _on_body_entered(body: Node2D) -> void:
 
 	_player_in_range = true
 	_nearby_player = body
+	_prompt_label.text = PROMPT_TEXT
 	_prompt_label.show()
 
 

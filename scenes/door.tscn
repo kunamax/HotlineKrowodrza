@@ -30,11 +30,11 @@ position = Vector2(0, -18)
 shape = SubResource("RectangleShape2D_door")
 
 [node name="PromptLabel" type="Label" parent="."]
-offset_left = -48.0
+offset_left = -52.0
 offset_top = -36.0
-offset_right = 48.0
+offset_right = 52.0
 offset_bottom = -22.0
-theme_override_font_sizes/font_size = 10
-text = "open"
+theme_override_font_sizes/font_size = 8
+text = "[F] open"
 horizontal_alignment = 1
 vertical_alignment = 1
