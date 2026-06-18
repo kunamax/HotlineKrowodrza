@@ -232,7 +232,7 @@ python tools/generate_audio.py
 | ![image](./docs/screenshots/01_menu.png) | Menu główne |
 | ![image](docs/screenshots/02_starting_room.png) | Pokój startowy z NPC i dialogiem |
 | ![image](docs/screenshots/03_dungeon_combat.png) | Walka na pokładzie statku |
-| ![image](docs/screenshots/04_boss_rooms.png) | Walka z bossem Cyclopsem |
+| ![image](./docs/screenshots/04_boss_rooms.png) | Walka z bossem Cyclopsem |
 
 ---
 
