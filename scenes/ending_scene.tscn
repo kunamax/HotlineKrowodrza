@@ -1,0 +1,101 @@
+[gd_scene format=3]
+
+[ext_resource type="Texture2D" path="res://assets/bg/main_menu_bg.png" id="1_bg"]
+[ext_resource type="Script" path="res://scripts/ending_scene.gd" id="2_script"]
+[ext_resource type="FontFile" path="res://assets/fonts/ARCADECLASSIC.TTF" id="3_font"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bg"]
+texture = ExtResource("1_bg")
+modulate_color = Color(0.5, 0.5, 0.5, 1)
+
+[node name="EndingScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_script")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_bg")
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -420.0
+offset_top = 40.0
+offset_right = 420.0
+offset_bottom = 120.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.63434, 0.8919244, 0.88754535, 1)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 92
+text = "THE END"
+horizontal_alignment = 1
+
+[node name="CreditsContainer" type="VBoxContainer" parent="."]
+offset_left = 0.0
+offset_top = 520.0
+offset_right = 2000.0
+offset_bottom = 820.0
+theme_override_constants/separation = 16
+
+[node name="CreditsLabel" type="Label" parent="CreditsContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.96, 1, 1)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 56
+text = "Created by"
+horizontal_alignment = 1
+
+[node name="Name1" type="Label" parent="CreditsContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 50
+text = "Jakub  Sadkiewicz"
+horizontal_alignment = 1
+
+[node name="Name2" type="Label" parent="CreditsContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 50
+text = "Ola  Fafara"
+horizontal_alignment = 1
+
+[node name="Name3" type="Label" parent="CreditsContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 50
+text = "Szymon  Ciosek"
+horizontal_alignment = 1
+
+[node name="Hint" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -360.0
+offset_top = -72.0
+offset_right = 360.0
+offset_bottom = -28.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.88, 0.95, 1, 0.9)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 28
+text = "Press F or LMB to return to menu"
+horizontal_alignment = 1

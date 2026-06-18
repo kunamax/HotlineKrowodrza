@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://rmllebatxixa" path="res://assets/bg/main_menu_bg.png" id="1_cxv6e"]
 [ext_resource type="Script" uid="uid://bwcp78lcp0bbk" path="res://scripts/starting_menu.gd" id="1_menu"]
 [ext_resource type="FontFile" uid="uid://ddps0wvowff7j" path="res://assets/fonts/ARCADECLASSIC.TTF" id="2_ncxof"]
+[ext_resource type="PackedScene" uid="uid://bqx7optionspanel" path="res://scenes/game_options_panel.tscn" id="3_options"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ncxof"]
 texture = ExtResource("1_cxv6e")
@@ -41,6 +42,7 @@ grow_vertical = 2
 script = ExtResource("1_menu")
 
 [node name="Panel" type="Panel" parent="." unique_id=650854703]
+mouse_filter = 2
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -112,7 +114,10 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_6gt2g")
 theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_ec4vr")
 text = "Quit"
 
+[node name="GameOptionsPanel" parent="." instance=ExtResource("3_options")]
+
 [node name="Label" type="Label" parent="." unique_id=586644712]
+mouse_filter = 2
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://qjj8hnlf2h8y"]
 
 [ext_resource type="Texture2D" uid="uid://bqd28hr0syide" path="res://assets/heart.png" id="1_v30as"]
+[ext_resource type="Script" path="res://scripts/heart.gd" id="2_heart"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ycbwg"]
 animations = [{
@@ -17,6 +18,8 @@ animations = [{
 radius = 6.0
 
 [node name="Heart" type="Area2D" unique_id=1787331980]
+collision_mask = 2
+script = ExtResource("2_heart")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=197999876]
 scale = Vector2(0.1, 0.1)

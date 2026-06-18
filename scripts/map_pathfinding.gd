@@ -46,6 +46,89 @@ func find_path(from_world: Vector2, to_world: Vector2) -> PackedVector2Array:
 	return path
 
 
+func is_on_ship_floor(world_pos: Vector2) -> bool:
+	if tile_map == null:
+		return false
+
+	var cell := _world_to_cell(world_pos)
+	_ensure_region(cell, cell)
+	return _is_ship_floor_cell(cell)
+
+
+func snap_to_ship_floor(world_pos: Vector2) -> Vector2:
+	if tile_map == null:
+		return world_pos
+
+	var cell := _world_to_cell(world_pos)
+	var floor_cell := _find_nearest_ship_floor(cell)
+	if not _is_ship_floor_cell(floor_cell):
+		return world_pos
+
+	return _cell_to_world_center(floor_cell)
+
+
+func build_minimap_data(sample_step: int = 2) -> Dictionary:
+	var points: PackedVector2Array = PackedVector2Array()
+	if tile_map == null:
+		return {"bounds": Rect2(), "points": points}
+
+	var used := tile_map.get_used_cells()
+	if used.is_empty():
+		return {"bounds": Rect2(), "points": points}
+
+	var min_cell := used[0]
+	var max_cell := used[0]
+	for cell in used:
+		min_cell.x = mini(min_cell.x, cell.x)
+		min_cell.y = mini(min_cell.y, cell.y)
+		max_cell.x = maxi(max_cell.x, cell.x)
+		max_cell.y = maxi(max_cell.y, cell.y)
+
+	var region := Rect2i(min_cell, max_cell - min_cell + Vector2i.ONE)
+	_build_region(region)
+
+	for x in range(min_cell.x, max_cell.x + 1, sample_step):
+		for y in range(min_cell.y, max_cell.y + 1, sample_step):
+			var cell := Vector2i(x, y)
+			if not _is_ship_floor_cell(cell):
+				continue
+			points.append(_cell_to_world_center(cell))
+
+	var top_left := _cell_to_world_center(min_cell)
+	var bottom_right := _cell_to_world_center(max_cell)
+	var bounds := Rect2(top_left, bottom_right - top_left)
+	bounds = bounds.grow(cell_size.length() * 0.5)
+	return {"bounds": bounds, "points": points}
+
+
+func _has_floor_tile(cell: Vector2i) -> bool:
+	return tile_map.get_cell_tile_data(cell) != null
+
+
+func _is_ship_floor_cell(cell: Vector2i) -> bool:
+	if not _has_floor_tile(cell):
+		return false
+
+	_ensure_region(cell, cell)
+	return astar.is_in_boundsv(cell) and not astar.is_point_solid(cell)
+
+
+func _find_nearest_ship_floor(cell: Vector2i) -> Vector2i:
+	if _is_ship_floor_cell(cell):
+		return cell
+
+	for radius in range(1, 16):
+		for dx in range(-radius, radius + 1):
+			for dy in range(-radius, radius + 1):
+				if abs(dx) != radius and abs(dy) != radius:
+					continue
+				var candidate := cell + Vector2i(dx, dy)
+				if _is_ship_floor_cell(candidate):
+					return candidate
+
+	return cell
+
+
 func _ensure_region(from_cell: Vector2i, to_cell: Vector2i) -> void:
 	var min_x := mini(from_cell.x, to_cell.x) - REGION_PADDING
 	var min_y := mini(from_cell.y, to_cell.y) - REGION_PADDING

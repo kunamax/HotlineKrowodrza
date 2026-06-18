@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dg44qfuyvrruy"]
 
 [ext_resource type="Texture2D" uid="uid://dcnc2r3w1kutt" path="res://assets/shield.png" id="1_vtru8"]
+[ext_resource type="Script" path="res://scripts/shield.gd" id="2_shield"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ohv3a"]
 animations = [{
@@ -17,6 +18,8 @@ animations = [{
 radius = 6.0
 
 [node name="Shield" type="Area2D" unique_id=885911774]
+collision_mask = 2
+script = ExtResource("2_shield")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1406075358]
 scale = Vector2(0.1, 0.1)

@@ -49,9 +49,10 @@ var is_stuttering := false
 @onready var sprite = $AnimatedSprite2D
 
 func _ready():
+	add_to_group("enemy")
 	hp_bar.max_value = MAX_HEALTH
 	hp_bar.value = HEALTH
-	pathfinding = get_tree().current_scene.get_node("Pathfinding")
+	pathfinding = get_tree().current_scene.get_node_or_null("Pathfinding")
 	patrol_target = global_position + Vector2(direction * 80, 0)
 	malfunction_timer = randf_range(0.0, 1.0)
 
@@ -349,6 +350,9 @@ func _update_sprite_glitch() -> void:
 func take_damage(amount):
 	HEALTH -= amount
 	hp_bar.value = HEALTH
+	_on_damage_taken(amount)
+	GameAudio.play_sfx("hit", randf_range(0.95, 1.05))
+	CombatFeel.on_enemy_hit()
 	modulate = Color(1, 0, 0)
 	await get_tree().create_timer(0.1).timeout
 	modulate = Color(1, 1, 1)
@@ -357,7 +361,13 @@ func take_damage(amount):
 		die()
 
 
+func _on_damage_taken(_amount: int) -> void:
+	pass
+
+
 func die():
+	GameAudio.play_sfx("enemy_death")
+	CombatFeel.on_enemy_killed()
 	var game := get_tree().current_scene as Node2D
 	if game != null and game.has_method("save_game"):
 		game.save_game()

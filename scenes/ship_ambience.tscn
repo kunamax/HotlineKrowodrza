@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bvhlhirgj1yme"]
+
+[ext_resource type="Script" path="res://scripts/ship_ambience.gd" id="1_ambience"]
+
+[node name="ShipAmbience" type="Node2D"]
+script = ExtResource("1_ambience")
