@@ -183,7 +183,6 @@ Gra nie posiada klasycznego quest loga - progresja jest liniowa z elementami eks
 |--------|---------------------|-----------|
 | **Grafika postaci gracza** | Generacja sprite'a żołnierza sci-fi w pixel arcie, konwersja GIF → arkusz klatek | Narzędzie generatywne AI (grafika), ezgif.com (konwersja) |
 | **Dialogi / fabuła** | Teksty NPC i lore - przygotowane z pomocą AI asystenta kodowania | Cursor AI (asystent) |
-| **Kod gry** | Część skryptów i mechanik rozwijana iteracyjnie z asystentem AI | Cursor AI |
 | **Audio** | Proceduralna synteza - **nie** generatywne AI | Python (`generate_audio.py`) |
 
 AI **nie** było używane do: generacji całego świata i kodu, muzyki (poza proceduralną syntezą), pełnej grafiki tilesetu ani modeli uczących się zachowania postaci.
